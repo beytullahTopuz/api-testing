@@ -15,19 +15,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
     private var movieList : ArrayList<Result>? = null ;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+    //    supportActionBar?.hide()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view  = binding.root
         setContentView(view)
-
-
-
-
-
 
 
         binding.button.setOnClickListener {
