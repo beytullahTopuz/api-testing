@@ -23,4 +23,5 @@ package com.t4zb.kotlinapitesting.modelLayer.rest.service.response
  * @since 2021-08-23
  */
 data class MoviesPopularity (
+    val adult: Boolean
 )

@@ -1,5 +1,10 @@
 package com.t4zb.kotlinapitesting.modelLayer.rest.service.api
 
+import com.t4zb.kotlinapitesting.modelLayer.rest.service.event.MoviesByPopularityList
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Query
+
 /**
  * We are going to use
  *
@@ -29,4 +34,9 @@ interface GetMovieEndPointApi {
      * @param language String
      * @param api_key String
      */
+    @GET("/3/movie/popular")
+    fun getMoviesByPopularity(
+        @Query("language") language: String?,
+        @Query("api_key") apiKey: String?
+    ): Call<MoviesByPopularityList>
 }
