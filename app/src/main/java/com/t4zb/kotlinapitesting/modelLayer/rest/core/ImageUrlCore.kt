@@ -1,5 +1,7 @@
 package com.t4zb.kotlinapitesting.modelLayer.rest.core
 
+import android.net.Uri
+
 /**
  * Handles movie image base url
  *
@@ -12,5 +14,12 @@ package com.t4zb.kotlinapitesting.modelLayer.rest.core
  * @author o00559125
  * @since 2021-08-23
  */
-class ImageUrlCore {
+object ImageUrlCore {
+
+    fun buildImageCore(relativePath: String): String {
+        return Uri.parse(MovieUrl).buildUpon()
+            .appendPath(imageSize)
+            .appendEncodedPath(relativePath)
+            .build().toString()
+    }
 }
