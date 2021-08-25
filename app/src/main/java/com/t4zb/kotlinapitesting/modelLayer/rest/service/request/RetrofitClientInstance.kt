@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * @author o00559125
  * @since 2021-08-23
  */
-class RetrofitClientInstance {
+object RetrofitClientInstance {
     private var retrofit: Retrofit? = null
 
     fun buildRetrofit(context: Context): Retrofit? {
