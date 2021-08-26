@@ -1,6 +1,6 @@
 package com.t4zb.kotlinapitesting.modelLayer.rest.service.event
 
-import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
+import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
 
 /**
  * Data Class that we are going to use in a [List] format to
@@ -9,4 +9,4 @@ import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopulari
  * @author o00559125
  * @since 2021-08-23
  */
-class MoviesByTopRatedList (val result: List<MoviesByTopRatedList>)
+class MoviesByTopRatedList (val result: List<MoviesTopRated>)

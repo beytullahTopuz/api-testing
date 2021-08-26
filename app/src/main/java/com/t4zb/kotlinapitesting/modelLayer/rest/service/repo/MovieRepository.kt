@@ -8,6 +8,7 @@ import com.t4zb.kotlinapitesting.modelLayer.rest.service.event.MoviesByPopularit
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.event.MoviesByTopRatedList
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.request.RetrofitClientInstance
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
+import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
 import com.t4zb.kotlinapitesting.util.Constants
 import com.t4zb.kotlinapitesting.util.showLogError
 import kotlinx.coroutines.CoroutineScope
@@ -47,11 +48,9 @@ import java.util.*
  * @since 2021-08-23
  */
 class MovieRepository(val app: Application) {
-    // val moviePopularityData = MutableLiveData<List<MoviesPopularity>>()
-   // val moviePopularityData = MutableLiveData<List<MoviesByPopularityList>>()
+    val moviePopularityData = MutableLiveData<List<MoviesPopularity>>()
+    val movieTopRatedData = MutableLiveData<List<MoviesTopRated>>()
 
-
-    val movieLiveData = MutableLiveData<List<Any>>()
     var isDataTopRated = MutableLiveData<Boolean>()
 
 
@@ -65,8 +64,8 @@ class MovieRepository(val app: Application) {
                 call: Call<MoviesByPopularityList>,
                 response: Response<MoviesByPopularityList>
             ) {
-                movieLiveData.postValue(response.body()!!.result)
-                isDataTopRated.value = false
+                moviePopularityData.postValue(response.body()!!.result)
+                isDataTopRated.postValue(false)
             }
 
             override fun onFailure(call: Call<MoviesByPopularityList>, t: Throwable) {
@@ -77,16 +76,16 @@ class MovieRepository(val app: Application) {
 
     @WorkerThread
     fun callWebServiceForMovieTopRatedEntity() {
-        var retrofit = RetrofitClientInstance.buildRetrofit(app.applicationContext)
-        var service = retrofit!!.create(GetMovieEndPointApi::class.java)
+        val retrofit = RetrofitClientInstance.buildRetrofit(app.applicationContext)
+        val service = retrofit!!.create(GetMovieEndPointApi::class.java)
         service.getMoviesByTopRated(Constants.API_KEY, Constants.LANGUAGE).enqueue(object :
             Callback<MoviesByTopRatedList> {
             override fun onResponse(
                 call: Call<MoviesByTopRatedList>,
                 response: Response<MoviesByTopRatedList>
             ) {
-                movieLiveData.postValue(response.body()!!.result)
-                isDataTopRated.value = false
+                movieTopRatedData.postValue(response.body()!!.result)
+                isDataTopRated.postValue(false)
             }
 
             override fun onFailure(call: Call<MoviesByTopRatedList>, t: Throwable) {

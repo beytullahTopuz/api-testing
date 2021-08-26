@@ -25,11 +25,11 @@ class SplashActivity : AppCompatActivity() {
 
         if (!isNetworkConnected()){
 
-            var toast = Toast.makeText(applicationContext,"You're offline. Check your connection",Toast.LENGTH_LONG)
+            val toast = Toast.makeText(applicationContext,"You're offline. Check your connection",Toast.LENGTH_LONG)
             toast.show()
         }
             Handler().postDelayed({
-                var intent =Intent(this,MainActivity::class.java)
+                val intent =Intent(this,MainActivity::class.java)
                 startActivity(intent)
                 finish()
             },4000)
