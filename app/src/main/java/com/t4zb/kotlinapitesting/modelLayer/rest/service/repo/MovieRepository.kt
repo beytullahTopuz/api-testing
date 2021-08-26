@@ -5,6 +5,7 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.api.GetMovieEndPointApi
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.event.MoviesByPopularityList
+import com.t4zb.kotlinapitesting.modelLayer.rest.service.event.MoviesByTopRatedList
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.request.RetrofitClientInstance
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
 import com.t4zb.kotlinapitesting.util.Constants
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 /**
  * #    The heart of this application
@@ -44,31 +46,61 @@ import retrofit2.Response
  * @author o00559125
  * @since 2021-08-23
  */
-class MovieRepository (val app : Application){
-    val moviePopularityData = MutableLiveData<List<MoviesPopularity>>()
+class MovieRepository(val app: Application) {
+    // val moviePopularityData = MutableLiveData<List<MoviesPopularity>>()
+   // val moviePopularityData = MutableLiveData<List<MoviesByPopularityList>>()
+
+
+    val movieLiveData = MutableLiveData<List<Any>>()
+    var isDataTopRated = MutableLiveData<Boolean>()
+
 
     @WorkerThread
     fun callWebServiceForMoviePopularityEntity() {
         val retrofit = RetrofitClientInstance.buildRetrofit(app.applicationContext)
         val service = retrofit!!.create(GetMovieEndPointApi::class.java)
-        service.getMoviesByPopularity("en",Constants.API_KEY).enqueue(object :
+        service.getMoviesByPopularity(Constants.LANGUAGE, Constants.API_KEY).enqueue(object :
             Callback<MoviesByPopularityList> {
             override fun onResponse(
                 call: Call<MoviesByPopularityList>,
                 response: Response<MoviesByPopularityList>
             ) {
-                moviePopularityData.postValue(response.body()!!.result)
+                movieLiveData.postValue(response.body()!!.result)
+                isDataTopRated.value = false
             }
 
             override fun onFailure(call: Call<MoviesByPopularityList>, t: Throwable) {
-                showLogError(TAG,t.printStackTrace().toString())
+                showLogError(TAG, t.printStackTrace().toString())
             }
         })
     }
 
+    @WorkerThread
+    fun callWebServiceForMovieTopRatedEntity() {
+        var retrofit = RetrofitClientInstance.buildRetrofit(app.applicationContext)
+        var service = retrofit!!.create(GetMovieEndPointApi::class.java)
+        service.getMoviesByTopRated(Constants.API_KEY, Constants.LANGUAGE).enqueue(object :
+            Callback<MoviesByTopRatedList> {
+            override fun onResponse(
+                call: Call<MoviesByTopRatedList>,
+                response: Response<MoviesByTopRatedList>
+            ) {
+                movieLiveData.postValue(response.body()!!.result)
+                isDataTopRated.value = false
+            }
+
+            override fun onFailure(call: Call<MoviesByTopRatedList>, t: Throwable) {
+                showLogError(TAG, t.printStackTrace().toString())
+            }
+        })
+    }
+
+
+
     init {
         CoroutineScope(Dispatchers.IO).launch {
             callWebServiceForMoviePopularityEntity()
+            callWebServiceForMovieTopRatedEntity()
         }
     }
 
