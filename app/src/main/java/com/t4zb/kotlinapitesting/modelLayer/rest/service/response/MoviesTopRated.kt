@@ -22,17 +22,16 @@ package com.t4zb.kotlinapitesting.modelLayer.rest.service.response
  * @since 2021-08-23
  */
 data class MoviesTopRated(
-    var popularity: Double,
-    var vote_count: String,
-    var poster_path: String,
-    var id: Int,
-    var adult: Boolean,
-    var backdrop_path: String,
-    var original_language: String,
-    var original_title: String,
-    var title: String,
-    var vote_average : Double,
-    var overview : String,
-    var release_date : String
-
+    val popularity: Double,
+    val vote_count: String,
+    val poster_path: String,
+    val id: Int,
+    val adult: Boolean,
+    val backdrop_path: String,
+    val original_language: String,
+    val original_title: String,
+    val title: String,
+    val vote_average: Double,
+    val overview: String,
+    val release_date: String
 )

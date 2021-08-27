@@ -32,10 +32,6 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             },4000)
-
-
-
-
     }
 
     private fun isNetworkConnected(): Boolean {
@@ -43,7 +39,4 @@ class SplashActivity : AppCompatActivity() {
 
         return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
-
-
-
 }

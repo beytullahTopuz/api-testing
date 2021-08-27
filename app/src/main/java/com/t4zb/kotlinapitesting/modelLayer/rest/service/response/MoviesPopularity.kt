@@ -24,17 +24,17 @@ package com.t4zb.kotlinapitesting.modelLayer.rest.service.response
  */
 data class MoviesPopularity (
     val adult: Boolean,
-    var backdrop_path: String,
-    var id: Int,
-    var original_language: String,
-    var original_title: String,
-    var overwiew : String,
-    var popularity: String,
-    var poster_path: String,
-    var release_date: String,
-    var title : String,
-    var video:Boolean,
-    var vote_average : Double,
-    var vote_count: Int
-
+    val backdrop_path: String,
+    val genre_ids: List<Int>,
+    val id: Int,
+    val original_language: String,
+    val original_title: String,
+    val overview: String,
+    val popularity: Double,
+    val poster_path: String,
+    val release_date: String,
+    val title: String,
+    val video: Boolean,
+    val vote_average: Double,
+    val vote_count: Int
 )

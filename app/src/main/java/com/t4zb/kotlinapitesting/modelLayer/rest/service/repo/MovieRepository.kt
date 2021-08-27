@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 /**
  * #    The heart of this application
@@ -53,19 +52,21 @@ class MovieRepository(val app: Application) {
 
     var isDataTopRated = MutableLiveData<Boolean>()
 
-
     @WorkerThread
     fun callWebServiceForMoviePopularityEntity() {
         val retrofit = RetrofitClientInstance.buildRetrofit(app.applicationContext)
         val service = retrofit!!.create(GetMovieEndPointApi::class.java)
-        service.getMoviesByPopularity(Constants.LANGUAGE, Constants.API_KEY).enqueue(object :
+        val call = service.getMoviesByPopularity(Constants.LANGUAGE, Constants.API_KEY)
+        call.enqueue(object :
             Callback<MoviesByPopularityList> {
             override fun onResponse(
                 call: Call<MoviesByPopularityList>,
                 response: Response<MoviesByPopularityList>
             ) {
-                moviePopularityData.postValue(response.body()!!.result)
-                isDataTopRated.postValue(false)
+                if (response.isSuccessful) {
+                    moviePopularityData.postValue(response.body()!!.results)
+                    isDataTopRated.postValue(false)
+                }
             }
 
             override fun onFailure(call: Call<MoviesByPopularityList>, t: Throwable) {
@@ -78,14 +79,16 @@ class MovieRepository(val app: Application) {
     fun callWebServiceForMovieTopRatedEntity() {
         val retrofit = RetrofitClientInstance.buildRetrofit(app.applicationContext)
         val service = retrofit!!.create(GetMovieEndPointApi::class.java)
-        service.getMoviesByTopRated(Constants.API_KEY, Constants.LANGUAGE).enqueue(object :
+        service.getMoviesByTopRated(Constants.LANGUAGE, Constants.API_KEY).enqueue(object :
             Callback<MoviesByTopRatedList> {
             override fun onResponse(
                 call: Call<MoviesByTopRatedList>,
                 response: Response<MoviesByTopRatedList>
             ) {
-                movieTopRatedData.postValue(response.body()!!.result)
-                isDataTopRated.postValue(false)
+                if (response.isSuccessful) {
+                    movieTopRatedData.postValue(response.body()!!.results)
+                    isDataTopRated.postValue(false)
+                }
             }
 
             override fun onFailure(call: Call<MoviesByTopRatedList>, t: Throwable) {
@@ -93,7 +96,6 @@ class MovieRepository(val app: Application) {
             }
         })
     }
-
 
 
     init {

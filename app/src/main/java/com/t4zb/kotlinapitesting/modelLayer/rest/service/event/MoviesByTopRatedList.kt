@@ -9,4 +9,9 @@ import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
  * @author o00559125
  * @since 2021-08-23
  */
-class MoviesByTopRatedList (val result: List<MoviesTopRated>)
+data class MoviesByTopRatedList(
+    val page: Int,
+    val results: List<MoviesTopRated>,
+    val total_pages: Int,
+    val total_results: Int
+)

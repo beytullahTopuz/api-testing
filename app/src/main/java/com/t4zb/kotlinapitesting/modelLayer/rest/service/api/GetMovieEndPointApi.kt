@@ -35,16 +35,16 @@ interface GetMovieEndPointApi {
      * @param language String
      * @param api_key String
      */
-    @GET("/3/movie/popular")
+    @GET("movie/popular")
     fun getMoviesByPopularity(
         @Query("language") language: String?,
         @Query("api_key") apiKey: String?
     ): Call<MoviesByPopularityList>
 
 
-    @GET("/3/movie/top_rated")
+    @GET("movie/top_rated")
     fun getMoviesByTopRated(
-        @Query("api_key") apiKey: String?,
-        @Query("languace") language: String?
+        @Query("language") language: String?,
+        @Query("api_key") apiKey: String?
     ):Call<MoviesByTopRatedList>
 }

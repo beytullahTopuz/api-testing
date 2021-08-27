@@ -1,6 +1,5 @@
 package com.t4zb.kotlinapitesting.services
 
-
 import com.t4zb.kotlinapitesting.model.Movies
 import retrofit2.Call
 import retrofit2.http.GET
