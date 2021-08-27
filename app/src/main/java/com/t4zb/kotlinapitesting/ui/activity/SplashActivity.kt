@@ -1,6 +1,5 @@
-package com.t4zb.kotlinapitesting
+package com.t4zb.kotlinapitesting.ui.activity
 
-import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
             toast.show()
         }
             Handler().postDelayed({
-                val intent =Intent(this,MainActivity::class.java)
+                val intent =Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             },4000)

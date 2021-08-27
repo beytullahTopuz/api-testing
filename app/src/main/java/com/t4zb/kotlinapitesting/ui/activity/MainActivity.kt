@@ -1,11 +1,13 @@
-package com.t4zb.kotlinapitesting
+package com.t4zb.kotlinapitesting.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.ActivityMainBinding
 import com.t4zb.kotlinapitesting.model.Movies
 import com.t4zb.kotlinapitesting.model.Result
 import com.t4zb.kotlinapitesting.services.MovieAPI
+import com.t4zb.kotlinapitesting.ui.fragment.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,12 +30,15 @@ class MainActivity : AppCompatActivity() {
         val view  = binding.root
         setContentView(view)
 
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
 
-        binding.button.setOnClickListener {
-            println("API getting")
-           loadAPI()
-        }
+        val homeFragment = HomeFragment()
+        fragmentTransaction.replace(R.id.frame_layout,homeFragment).commit()
+
     }
+
+
 
 
 
@@ -41,10 +46,6 @@ class MainActivity : AppCompatActivity() {
     fun loadAPI() {
         //   : https://api.themoviedb.org
         val BASE_URL = "https://api.themoviedb.org"
-
-
-
-
 
 
         var retrofit = Retrofit.Builder().baseUrl(BASE_URL)
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
                             str+= "\n${i.original_title}"
                         }
-                        binding.textView2.text = str;
+                 //       binding.textView2.text = str;
 
 
 
