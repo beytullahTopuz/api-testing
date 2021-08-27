@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@layout/activity_main">
+    app:startDestination="@id/homeFragmentDirection">
+
+    <!-- Home Fragment -->
+    <fragment
+        android:id="@+id/homeFragmentDirection"
+        android:name="com.t4zb.kotlinapitesting.ui.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_detail" />
+    </fragment>
+
+    <!-- Detail Fragment -->
+
+    <action
+        android:id="@+id/globalHome"
+        app:destination="@+id/homeFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
 
 </navigation>

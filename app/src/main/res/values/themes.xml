@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="LightMode" parent="Theme.MaterialComponents.DayNight.DarkActionBar" >
+        <item name="color_primary">@color/purple_500</item>
+    </style>
+
+    <style name="DarkMode" parent="Theme.MaterialComponents.DayNight.DarkActionBar" >
+        <item name="color_primary">@color/white</item>
+    </style>
 </resources>
