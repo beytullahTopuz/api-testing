@@ -13,5 +13,7 @@ class Constants {
         const val IMAGE_URL = "https://image.tmdb.org/t/p/"
         const val IMAGE_SIZE ="w185"
         const val LANGUAGE = "en"
+        const val MOVIE_TYPE_POPULAR = "MOVIE POPULAR"
+        const val MOVIE_TYPE_TOP_RATED = "MOVIE TOP RATED"
     }
 }

@@ -7,14 +7,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.preference.PreferenceFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.helper.PicassoHelper
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
 import com.t4zb.kotlinapitesting.ui.activity.MainActivity
+import com.t4zb.kotlinapitesting.ui.fragment.HomeFragmentDirections
 import com.t4zb.kotlinapitesting.ui.viewmodel.SharedViewModel
+import com.t4zb.kotlinapitesting.util.Constants
+import com.t4zb.kotlinapitesting.util.showLogDebug
 import java.util.ArrayList
 
 
@@ -63,14 +68,20 @@ class MoviePopAdapter(
             cardImage.let {
                 PicassoHelper.picassoOkhttp(mContext, currentPosition.poster_path, cardImage)
             }
-            textView.text = currentPosition.title
-
-
-
+            textView.let {
+                it.text = currentPosition.title
+            }
         }
 
         holder.parent.setOnClickListener {
+            // val transitionName
+            // val extras = FragmentNavigatorExtras(holder.parent to transitionName)
+            val direction = HomeFragmentDirections.actionHomeFragmentDirectionToDetailFragment2()
 
+            mViewModel.selectedMoviePop.value = currentPosition
+            mViewModel.movieType.value = Constants.MOVIE_TYPE_POPULAR
+            findNavController(holder.parent).navigate(direction)
+            showLogDebug(TAG, "Movie: ${mViewModel.selectedMoviePop.value.toString()}")
             //findNavController().navigate(R.id.homeFragment, null)
 
         }
@@ -83,5 +94,9 @@ class MoviePopAdapter(
 
     override fun getItemCount(): Int {
         return mMovies.size
+    }
+
+    companion object {
+        private const val TAG = "MoviePopAdapter"
     }
 }

@@ -19,4 +19,5 @@ class SharedViewModel (app: Application) : AndroidViewModel(app) {
 
     val selectedMoviePop = MutableLiveData<MoviesPopularity>()
     val selectedMovieTopRated = MutableLiveData<MoviesTopRated>()
+    val movieType = MutableLiveData<String>()
 }

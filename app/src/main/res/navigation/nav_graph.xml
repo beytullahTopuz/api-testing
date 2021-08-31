@@ -12,13 +12,16 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_home_to_detail" />
-        <action
             android:id="@+id/action_homeFragmentDirection_to_detailFragment2"
             app:destination="@id/detailFragment" />
     </fragment>
 
     <!-- Detail Fragment -->
+    <fragment
+    android:id="@+id/detailFragment"
+    android:name="com.t4zb.kotlinapitesting.ui.fragment.DetailFragment"
+    android:label="fragment_detail"
+    tools:layout="@layout/fragment_detail" />
 
     <action
         android:id="@+id/globalHome"
@@ -26,10 +29,5 @@
         app:launchSingleTop="true"
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true"/>
-    <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.t4zb.kotlinapitesting.ui.fragment.detailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
 
 </navigation>

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.t4zb.kotlinapitesting.R
 
 
-class detailFragment : Fragment() {
+class DetailFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
