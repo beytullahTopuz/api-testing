@@ -13,7 +13,7 @@ import com.t4zb.kotlinapitesting.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
     private lateinit var mBinding: ActivityMainBinding
 
-    val currentNavFragment: Fragment?
+    private val currentNavFragment: Fragment?
         get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
             ?.childFragmentManager
             ?.fragments
@@ -23,12 +23,8 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
-        mBinding.run {
-            findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener(
-                this@MainActivity
-            )
-        }
+        supportActionBar?.hide()
+        navigateToHome()
     }
 
     override fun onDestinationChanged(
@@ -44,9 +40,14 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     fun navigateToHome() {
-        currentNavFragment?.apply {
-            exitTransition = MaterialFadeThrough().apply {
-                duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        mBinding.run {
+            findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener(
+                this@MainActivity
+            )
+            currentNavFragment?.apply {
+                exitTransition = MaterialFadeThrough().apply {
+                    duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+                }
             }
         }
     }

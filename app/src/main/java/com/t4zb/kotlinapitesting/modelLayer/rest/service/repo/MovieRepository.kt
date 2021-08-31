@@ -50,6 +50,8 @@ class MovieRepository(val app: Application) {
     val moviePopularityData = MutableLiveData<List<MoviesPopularity>>()
     val movieTopRatedData = MutableLiveData<List<MoviesTopRated>>()
 
+    val movieBanner = MutableLiveData<MoviesPopularity>()
+
     var isDataTopRated = MutableLiveData<Boolean>()
 
     @WorkerThread
@@ -65,6 +67,7 @@ class MovieRepository(val app: Application) {
             ) {
                 if (response.isSuccessful) {
                     moviePopularityData.postValue(response.body()!!.results)
+                    movieBanner.postValue(response.body()!!.results[0])
                     isDataTopRated.postValue(false)
                 }
             }

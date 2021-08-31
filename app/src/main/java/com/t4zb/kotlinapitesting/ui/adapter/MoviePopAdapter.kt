@@ -6,21 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.preference.PreferenceFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.transition.MaterialElevationScale
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.helper.PicassoHelper
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
-import com.t4zb.kotlinapitesting.ui.activity.MainActivity
 import com.t4zb.kotlinapitesting.ui.fragment.HomeFragmentDirections
 import com.t4zb.kotlinapitesting.ui.viewmodel.SharedViewModel
 import com.t4zb.kotlinapitesting.util.Constants
 import com.t4zb.kotlinapitesting.util.showLogDebug
-import java.util.ArrayList
+import java.util.*
 
 
 /**
@@ -41,15 +39,9 @@ class MoviePopAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val parent = itemView
-
-
-        // CardView
-
-      //  val cardView: CardView = parent.findViewById(R.id.item_card_view)
-        val cardImage : ImageView = parent.findViewById(R.id.card_image_view)
-        val textView : TextView = parent.findViewById(R.id.textViewMovieName)
-
-
+        val cardImage: ImageView = parent.findViewById(R.id.card_image_view)
+        val textView: TextView = parent.findViewById(R.id.textViewMovieName)
+        val transitioningCard: MaterialCardView = parent.findViewById(R.id.transition_card_item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -73,23 +65,17 @@ class MoviePopAdapter(
             }
         }
 
-        holder.parent.setOnClickListener {
-            // val transitionName
-            // val extras = FragmentNavigatorExtras(holder.parent to transitionName)
+        holder.transitioningCard.setOnClickListener {
+
+            val transitionName = mContext.getString(R.string.detail_card_transition)
+            val extras = FragmentNavigatorExtras(holder.transitioningCard to transitionName)
             val direction = HomeFragmentDirections.actionHomeFragmentDirectionToDetailFragment2()
 
             mViewModel.selectedMoviePop.value = currentPosition
             mViewModel.movieType.value = Constants.MOVIE_TYPE_POPULAR
-            findNavController(holder.parent).navigate(direction)
+            findNavController(holder.parent).navigate(direction, extras)
             showLogDebug(TAG, "Movie: ${mViewModel.selectedMoviePop.value.toString()}")
-            //findNavController().navigate(R.id.homeFragment, null)
-
         }
-
-      /*  holder.imageView.setOnClickListener {
-            // Navigation Components - NavController
-        }
-        */
     }
 
     override fun getItemCount(): Int {
