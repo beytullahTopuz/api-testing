@@ -36,8 +36,12 @@ class MovieTopRatedAdapter(context: Context, movies: ArrayList<MoviesTopRated>, 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-
-
+        val currentPosition = mMovies[position]
+        with(holder){
+            imageView.let {
+                PicassoHelper.picassoOkhttp(mContext,currentPosition.poster_path,imageView)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

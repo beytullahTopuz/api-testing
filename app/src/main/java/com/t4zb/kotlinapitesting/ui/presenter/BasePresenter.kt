@@ -18,6 +18,8 @@ class BasePresenter constructor(contract: BaseContract.ViewMain) : BaseContract.
         showLogDebug(TAG, "initialization Started")
     }
 
+
+
     companion object {
         private const val TAG = "BasePresenter"
     }

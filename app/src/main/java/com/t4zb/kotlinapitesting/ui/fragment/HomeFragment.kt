@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.FragmentHomeBinding
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
+import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
 import com.t4zb.kotlinapitesting.ui.adapter.MoviePopAdapter
+import com.t4zb.kotlinapitesting.ui.adapter.MovieTopRatedAdapter
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
 import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
@@ -24,6 +26,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), BaseContract.ViewMain
     private lateinit var mSharedViewModel: SharedViewModel
 
     private lateinit var moviesPopAdapter: MoviePopAdapter
+
+    private lateinit var moviesTopRatedAdapter: MovieTopRatedAdapter
 
     private val mPresenter: BasePresenter by lazy {
         BasePresenter(this)
@@ -49,12 +53,26 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), BaseContract.ViewMain
 
     override fun initializeViews() {
         mBinding.popularRecyclerView.layoutManager = GridLayoutManager(mContext,2)
+        mBinding.topRatedRecyclerView.layoutManager = LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false)
+
+
+
+        mSharedViewModel.dataRepo.movieTopRatedData.observe(viewLifecycleOwner,{
+            if (it != null && it.isNotEmpty()){
+                moviesTopRatedAdapter = MovieTopRatedAdapter(
+                    mContext,
+                    it as ArrayList<MoviesTopRated>,
+                    mSharedViewModel
+                )
+                mBinding.topRatedRecyclerView.adapter = moviesTopRatedAdapter
+            }
+        })
 
         mSharedViewModel.dataRepo.moviePopularityData.observe(viewLifecycleOwner, { movies ->
             if (movies != null && movies.isNotEmpty()) {
                 moviesPopAdapter = MoviePopAdapter(
                     mContext,
-                    //Error :   NullPointerException: null cannot be cast to non-null type java.util.ArrayList
+
                     movies as ArrayList<MoviesPopularity>,
                     mSharedViewModel
                 )
