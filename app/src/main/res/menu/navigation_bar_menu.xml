@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/novigationBarItemMovie"
+        android:contentDescription="movie"
+        android:icon="@drawable/logo"
+        android:title="MOVIE" />
+
+    <item
+        android:id="@+id/novigationBarItemStar"
+        android:contentDescription="Star"
+        android:icon="@drawable/ic_star"
+        android:title="STAR" />
+
+    <item
+        android:id="@+id/novigationBarItemProfile"
+        android:contentDescription="profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="PROFILE" />
+
+</menu>

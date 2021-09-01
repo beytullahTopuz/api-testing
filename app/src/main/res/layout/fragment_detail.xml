@@ -14,7 +14,126 @@
         tools:context=".ui.fragment.DetailFragment">
 
 
-        <ImageView
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="357dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/imageViewBackdrop"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="27dp"
+                    android:contentDescription="@string/movie_name"
+                    android:scaleType="fitXY"
+
+                    android:src="@drawable/ic_launcher_background"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:layout_marginEnd="76dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/materialCardView"
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewBackdrop">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:srcCompat="@drawable/ic_star"
+                        tools:layout_editor_absoluteX="252dp"
+                        tools:layout_editor_absoluteY="276dp" />
+
+                    <TextView
+                        android:id="@+id/voteAverage"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="9.2"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="300dp"
+                        tools:layout_editor_absoluteY="276dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="257dp"
+                    android:layout_height="41dp"
+
+                    android:layout_marginBottom="107dp"
+                    android:background="#83000000"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/materialCardView" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView"
+                    android:layout_width="0dp"
+                    android:layout_height="226dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginEnd="91dp"
+                    android:elevation="55dp"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageViewPoster"
+                        android:layout_width="154dp"
+                        android:layout_height="226dp"
+                        android:scaleType="fitXY"
+
+                        tools:src="@tools:sample/avatars" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/textViewOverview"
+            android:layout_width="384dp"
+            android:layout_height="177dp"
+            android:layout_marginBottom="51dp"
+            android:gravity="top|start"
+            android:padding="25dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.407"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+
+        <!--<ImageView
             android:id="@+id/imageViewBackdrop"
             android:layout_width="0dp"
             android:layout_height="266dp"
@@ -53,7 +172,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

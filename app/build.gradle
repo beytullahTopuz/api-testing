@@ -93,7 +93,7 @@ dependencies {
     }
 
     /* Cuberto */
-    //implementation 'com.cuberto:liquid-swipe:1.0.0'
+  //  implementation 'com.cuberto:liquid-swipe:1.0.0'
 
     //SharedPreferences
     def shared_version = "1.1.1"

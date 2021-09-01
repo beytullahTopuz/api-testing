@@ -67,35 +67,71 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
 
     override fun initializeViews() {
 
-        when (mSharedViewModel.movieType.value){
+        when (mSharedViewModel.movieType.value) {
             Constants.MOVIE_TYPE_POPULAR -> {
                 mSharedViewModel.selectedMoviePop.observe(viewLifecycleOwner, Observer { movies ->
                     mainBinding.run {
 
+                        mSharedViewModel.selectedMoviePop.observe(viewLifecycleOwner, Observer {
+
+
+                            if (it != null) {
+                                mainBinding.textViewTitle.text = it.title
+
+                                mainBinding.textViewOverview.text = it.overview
+
+                                mainBinding.voteAverage.text = movies.vote_average.toString()
+
+                                PicassoHelper.picassoOkhttp(
+                                    mContext,
+                                    it.poster_path,
+                                    mainBinding.imageViewPoster
+                                )
+
+                                PicassoHelper.picassoOkhttp(
+                                    mContext,
+                                    it.backdrop_path,
+                                    mainBinding.imageViewBackdrop
+                                )
+                            }
+                        })
                     }
                 })
             }
             Constants.MOVIE_TYPE_TOP_RATED -> {
 
+                mSharedViewModel.selectedMovieTopRated.observe(viewLifecycleOwner, Observer { movies ->
+
+
+
+
+
+                    mainBinding.run {
+                        if (movies != null) {
+                            mainBinding.textViewTitle.text = movies.title
+
+                            mainBinding.textViewOverview.text = movies.overview
+                            mainBinding.voteAverage.text = movies.vote_average.toString()
+
+                            PicassoHelper.picassoOkhttp(
+                                mContext,
+                                movies.poster_path,
+                                mainBinding.imageViewPoster
+                            )
+
+                            PicassoHelper.picassoOkhttp(
+                                mContext,
+                                movies.backdrop_path,
+                                mainBinding.imageViewBackdrop
+                            )
+                        }
+                    }
+
+                })
+
             }
         }
 
-        mSharedViewModel.selectedMoviePop.observe(viewLifecycleOwner, Observer {
 
-
-            if (it != null) {
-                mainBinding.textViewTitle.text = it.title
-
-                mainBinding.textViewOverview.text = it.overview
-
-                PicassoHelper.picassoOkhttp(mContext, it.poster_path, mainBinding.imageViewPoster)
-
-                PicassoHelper.picassoOkhttp(
-                    mContext,
-                    it.backdrop_path,
-                    mainBinding.imageViewBackdrop
-                )
-            }
-        })
     }
 }
