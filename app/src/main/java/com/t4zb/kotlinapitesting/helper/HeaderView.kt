@@ -17,7 +17,7 @@ import com.t4zb.kotlinapitesting.R
  */
 class HeaderView : LinearLayout {
 
-    lateinit var searchButton: ImageView
+   // lateinit var searchButton: ImageView
 
     constructor(context: Context?) : super(context) {}
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
@@ -39,7 +39,7 @@ class HeaderView : LinearLayout {
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        searchButton = findViewById(R.id.widget_header_search)
+//        searchButton = findViewById(R.id.widget_header_search)
     }
 
     fun bindTo() {

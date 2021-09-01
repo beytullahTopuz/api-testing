@@ -8,6 +8,7 @@
 
     <nl.joery.animatedbottombar.AnimatedBottomBar
         android:id="@+id/bottomNavigationView"
+        style="@style/Widget.MaterialComponents.BottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/white"
@@ -15,7 +16,14 @@
         app:abb_selectedTabType="text"
         app:abb_indicatorAppearance="round"
         app:abb_indicatorLocation="bottom"
-        app:abb_badgeTextColor="@color/primary_dark"
+        app:abb_tabColorSelected="@color/primary_dark"
+        app:abb_indicatorColor="@color/primary"
+        app:abb_textStyle="bold"
+        app:abb_textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:abb_rippleColor="@color/primary"
+        app:abb_rippleEnabled="true"
+        app:abb_selectedIndex="0"
+        app:abb_tabAnimation="slide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

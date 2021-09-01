@@ -57,9 +57,9 @@ class HeaderBehaviorHelper : CoordinatorLayout.Behavior<HeaderView?> {
                 - (getToolbarHeight(mContext) - child.height) * percentage / 2)
         childPosition -= mStartMarginBottom * (1f - percentage)
         val lp = child.layoutParams as CoordinatorLayout.LayoutParams
-        if (Math.abs(dependency.getY()) >= maxScroll / 2) {
+        if (abs(dependency.getY()) >= maxScroll / 2) {
             val layoutPercentage: Float =
-                (Math.abs(dependency.getY()) - maxScroll / 2) / Math.abs(maxScroll / 2)
+                (Math.abs(dependency.getY()) - maxScroll / 2) / abs(maxScroll / 2)
             lp.leftMargin = (layoutPercentage * mEndMarginLeft).toInt() + mStartMarginLeft
         } else {
             lp.leftMargin = mStartMarginLeft

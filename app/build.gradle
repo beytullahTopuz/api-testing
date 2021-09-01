@@ -98,6 +98,11 @@ dependencies {
 
     implementation 'nl.joery.animatedbottombar:library:1.1.0'
 
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
     /* Cuberto */
   //  implementation 'com.cuberto:liquid-swipe:1.0.0'
 

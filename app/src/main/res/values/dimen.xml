@@ -12,4 +12,18 @@
     <dimen name="header_view_end_text_size">18sp</dimen>
 
     <dimen name="padding_general">8dp</dimen>
+
+    <!-- Default screen margins for Profile Page, per the Android Design guidelines. -->
+    <dimen name="edit_text_size">18sp</dimen>
+    <dimen name="card_profile_corners">125dp</dimen>
+    <dimen name="profile_icon">145dp</dimen>
+
+    <dimen name="profile_card_height">275dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="profile_width">75dp</dimen>
+    <dimen name="profile_height">75dp</dimen>
 </resources>

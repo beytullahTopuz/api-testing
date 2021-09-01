@@ -44,8 +44,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), BaseContract.ViewMain
 
     private lateinit var moviesTopRatedAdapter: MovieTopRatedAdapter
 
-    private var isHideToolbarView = false
-
     private val mPresenter: BasePresenter by lazy {
         BasePresenter(this)
     }

@@ -1,132 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.UserProfileFragment">
+    tools:context="com.t4zb.kotlinapitesting.ui.fragment.UserProfileFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar_profile"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:expandedTitleMarginEnd="64dp"
+            android:requiresFadingEdge="horizontal"
+            android:fadingEdgeLength="16dp"
+            android:fadingEdge="horizontal"
+            app:contentScrim="@color/colorWhite"
+            app:expandedTitleMarginStart="48dp"
+            app:statusBarScrim="@color/colorWhite"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/toolbar_banner_profile"
+                android:contentDescription="@string/image"
+                app:shapeAppearanceOverlay="@style/ImageView.Corner"
+                android:layout_width="match_parent"
+                android:background="@drawable/card_profile"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="fitXY"
+                android:layout_height="@dimen/profile_card_height"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_profile"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin">
+
+                <include
+                    android:id="@+id/toolbar_header_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/widget_header_profile"
+                    android:layout_marginStart="30dp"
+                    app:layout_behavior=".helper.HeaderBehaviorHelper" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/frag_nested_lyt_profile"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:drawableStart="@drawable/ic_baseline_person_24"
-        android:text="mUserName"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="19dp"
-        android:inputType="textEmailAddress"
-        android:drawableStart="@drawable/ic_baseline_person_24"
-        android:text="test@mail.com"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:drawableStart="@drawable/ic_baseline_person_24"
-        android:text="star : 12"
-        app:layout_constraintBottom_toTopOf="@+id/editText4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="118dp"
-        android:drawableStart="@drawable/ic_baseline_person_24"
-        android:text="**********"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="28dp"
-        app:cardBackgroundColor="#FFB42E"
-        app:cardCornerRadius="@dimen/corner_radius"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="80dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="19dp"
-                android:layout_marginTop="42dp"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintBottom_toTopOf="@+id/textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="66dp"
-                android:text="Beytullah Topuz"
-                android:textColor="@color/white"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/primary_dark"
+                    app:boxBackgroundColor="@color/colorRightBubble"
+                    app:boxCollapsedPaddingTop="3dp"
+                    app:boxStrokeColor="@color/colorRightBubble"
+                    app:boxStrokeWidth="1dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:counterTextColor="@color/primary_dark"
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/primary_dark"
+                    app:hintTextColor="@color/primary_dark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/profile_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:hint="@string/name"
+                        android:inputType="text"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/primary_dark"
+                        android:textSize="@dimen/edit_text_size" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_name"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/primary_dark"
+                    app:boxBackgroundColor="@color/colorRightBubble"
+                    app:boxCollapsedPaddingTop="3dp"
+                    app:boxStrokeColor="@color/colorRightBubble"
+                    app:boxStrokeWidth="1dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:counterTextColor="@color/primary_dark"
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/primary_dark"
+                    app:hintTextColor="@color/primary_dark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/profile_email_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:hint="@string/mail_address"
+                        android:inputType="text"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/primary_dark"
+                        android:textSize="@dimen/edit_text_size" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat_star"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/primary_dark"
+                    app:boxBackgroundColor="@color/colorRightBubble"
+                    app:boxCollapsedPaddingTop="3dp"
+                    app:boxStrokeColor="@color/colorRightBubble"
+                    app:boxStrokeWidth="1dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:counterTextColor="@color/primary_dark"
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/primary_dark"
+                    app:hintTextColor="@color/primary_dark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/profile_email_star"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:hint="@string/star"
+                        android:inputType="text"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/primary_dark"
+                        android:textSize="@dimen/edit_text_size" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_star"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/primary_dark"
+                    app:boxBackgroundColor="@color/colorRightBubble"
+                    app:boxCollapsedPaddingTop="3dp"
+                    app:boxStrokeColor="@color/colorRightBubble"
+                    app:boxStrokeWidth="1dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:counterTextColor="@color/primary_dark"
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/primary_dark"
+                    app:hintTextColor="@color/primary_dark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/profile_star"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:hint="@string/password"
+                        android:inputType="text"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/primary_dark"
+                        android:textSize="@dimen/edit_text_size" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <Button
+                android:id="@+id/button_update"
+                android:layout_width="153dp"
+                android:layout_height="63dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="20dp"
+                android:text="UPDATE"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_pass" />
+
+            <Button
+                android:id="@+id/button_logOut"
+                android:layout_width="153dp"
+                android:layout_height="63dp"
+                android:layout_marginEnd="26dp"
+                android:layout_marginTop="20dp"
+                android:text="LOG OUT"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_pass" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.core.widget.NestedScrollView>
 
-    <Button
-        android:id="@+id/button_update"
-        android:layout_width="153dp"
-        android:layout_height="63dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="20dp"
-        android:text="UPDATE"
-        app:layout_constraintEnd_toStartOf="@+id/button_logOut"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
-
-    <Button
-        android:id="@+id/button_logOut"
-        android:layout_width="153dp"
-        android:layout_height="63dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="LOG OUT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_update"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
