@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_homeFragmentDirection_to_detailFragment2"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragmentDirection_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
     <!-- Detail Fragment -->
@@ -22,6 +25,12 @@
     android:name="com.t4zb.kotlinapitesting.ui.fragment.DetailFragment"
     android:label="fragment_detail"
     tools:layout="@layout/fragment_detail" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.t4zb.kotlinapitesting.ui.fragment.UserProfileFragment"
+        android:label="user_profile"
+        tools:layout="@layout/fragment_user_profile"/>
 
     <action
         android:id="@+id/globalHome"

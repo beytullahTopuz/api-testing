@@ -68,56 +68,76 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textViewTopRated"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="18dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
-                android:text="Top Rated"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/top_rated_recycler_view"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textViewPopular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="18dp"
-                android:layout_marginStart="5dp"
-                android:text="Popular"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/popular_recycler_view"
-                app:layout_constraintStart_toStartOf="@+id/popular_recycler_view"
-                app:layout_constraintTop_toBottomOf="@+id/top_rated_recycler_view" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/top_rated_recycler_view"
+            <com.amar.library.ui.StickyScrollView
+                android:id="@+id/sticky_top_rated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="22dp"
-                android:orientation="horizontal"
-                android:overScrollMode="never"
-                android:nestedScrollingEnabled="false"
-                app:layout_constraintBottom_toTopOf="@+id/textViewPopular"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTopRated" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:stickyHeader="@id/textViewTopRated">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/popular_recycler_view"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewTopRated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="18dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="15dp"
+                        android:text="Top Rated"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/top_rated_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="22dp"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal" />
+
+                </LinearLayout>
+
+            </com.amar.library.ui.StickyScrollView>
+
+            <com.amar.library.ui.StickyScrollView
                 android:layout_width="match_parent"
-                android:layout_height="3196dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginStart="1dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"
+                app:stickyHeader="@id/textViewPopular"
+                app:layout_constraintTop_toBottomOf="@+id/sticky_top_rated"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPopular"
-                tools:listitem="@layout/item_card" />
+                app:layout_constraintStart_toStartOf="parent">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewPopular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="18dp"
+                        android:layout_marginStart="5dp"
+                        android:text="Popular"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/popular_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="1dp"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginBottom="5dp"
+                        tools:listitem="@layout/item_card" />
+
+                </LinearLayout>
+
+            </com.amar.library.ui.StickyScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

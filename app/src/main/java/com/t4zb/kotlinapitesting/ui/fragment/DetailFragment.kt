@@ -6,8 +6,6 @@ import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import android.view.ViewGroup
-import androidx.core.view.doOnPreDraw
 import com.google.android.material.transition.MaterialContainerTransform
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.FragmentDetailBinding

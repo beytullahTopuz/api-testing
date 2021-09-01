@@ -9,6 +9,9 @@ import androidx.navigation.findNavController
 import com.google.android.material.transition.MaterialFadeThrough
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.ActivityMainBinding
+import com.t4zb.kotlinapitesting.ui.fragment.HomeFragmentDirections
+import meow.bottomnavigation.MeowBottomNavigation
+import nl.joery.animatedbottombar.AnimatedBottomBar
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
     private lateinit var mBinding: ActivityMainBinding
@@ -25,6 +28,28 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         setContentView(mBinding.root)
         supportActionBar?.hide()
         navigateToHome()
+
+        mBinding.bottomNavigationView.setOnTabSelectListener(object : AnimatedBottomBar.OnTabSelectListener{
+            override fun onTabSelected(
+                lastIndex: Int,
+                lastTab: AnimatedBottomBar.Tab?,
+                newIndex: Int,
+                newTab: AnimatedBottomBar.Tab
+            ) {
+                when(newIndex) {
+                    0 -> {
+                        findNavController(R.id.nav_host_fragment).navigateUp()
+                    }
+                    1->{
+
+                    }
+                    2->{
+                        val directions = HomeFragmentDirections.actionHomeFragmentDirectionToProfileFragment()
+                        findNavController(R.id.nav_host_fragment).navigate(directions)
+                    }
+                }
+            }
+        })
     }
 
     override fun onDestinationChanged(

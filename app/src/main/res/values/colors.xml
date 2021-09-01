@@ -13,4 +13,5 @@
     <color name="primary">#FFB42F</color>
     <color name="colorWhite">#F2FFFFFF</color>
     <color name="movieGray">#333333</color>
+    <color name="gray_fade">#99E5E6E8</color>
 </resources>
