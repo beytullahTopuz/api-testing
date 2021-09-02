@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.t4zb.kotlinapitesting.ui.fragment.UserProfileFragment">
+    tools:context="com.t4zb.kotlinapitesting.ui.fragment.profile.UserProfileFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar_profile"
@@ -254,7 +254,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_pass" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_logOut"
+                android:id="@+id/buttonSignout"
                 android:layout_width="153dp"
                 android:layout_height="63dp"
                 android:layout_marginEnd="16dp"
@@ -263,7 +263,7 @@
                 android:focusable="true"
                 android:foreground="@drawable/round_selector"
                 android:background="@drawable/gradient_bg_button"
-                android:text="@string/log_out_cap"
+                android:text="Sign out"
                 android:textColor="@color/movieGray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_pass" />
