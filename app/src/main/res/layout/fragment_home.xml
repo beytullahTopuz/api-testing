@@ -11,6 +11,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
+        android:background="@color/movieGray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -88,7 +89,8 @@
                         android:layout_marginBottom="18dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="15dp"
-                        android:text="Top Rated"
+                        style="@style/TextAppearance.AppCompat.Title"
+                        android:text="@string/top_rated"
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -96,6 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="22dp"
+                        tools:listitem="@layout/item_movies"
                         android:nestedScrollingEnabled="false"
                         android:orientation="horizontal" />
 
@@ -122,7 +125,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="18dp"
                         android:layout_marginStart="5dp"
-                        android:text="Popular"
+                        style="@style/TextAppearance.AppCompat.Title"
+                        android:text="@string/popular"
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView

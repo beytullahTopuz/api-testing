@@ -74,6 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat_mail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -81,6 +82,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit"
                     android:textColorHint="@color/primary_dark"
                     app:boxBackgroundColor="@color/colorRightBubble"
                     app:boxCollapsedPaddingTop="3dp"
@@ -113,12 +115,17 @@
                 android:id="@+id/linearLayoutCompat_mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_name"
-                android:orientation="horizontal">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat_star"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_name">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit"
                     android:textColorHint="@color/primary_dark"
                     app:boxBackgroundColor="@color/colorRightBubble"
                     app:boxCollapsedPaddingTop="3dp"
@@ -149,14 +156,18 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/linearLayoutCompat_star"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_mail">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit"
                     android:textColorHint="@color/primary_dark"
                     app:boxBackgroundColor="@color/colorRightBubble"
                     app:boxCollapsedPaddingTop="3dp"
@@ -189,12 +200,16 @@
                 android:id="@+id/linearLayoutCompat_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_star"
-                android:orientation="horizontal">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_star">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit"
                     android:textColorHint="@color/primary_dark"
                     app:boxBackgroundColor="@color/colorRightBubble"
                     app:boxCollapsedPaddingTop="3dp"
@@ -223,24 +238,33 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_update"
                 android:layout_width="153dp"
                 android:layout_height="63dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="20dp"
-                android:text="UPDATE"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/gradient_bg_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/round_selector"
+                android:text="@string/update_cap"
+                android:textColor="@color/movieGray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_pass" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_logOut"
                 android:layout_width="153dp"
                 android:layout_height="63dp"
-                android:layout_marginEnd="26dp"
-                android:layout_marginTop="20dp"
-                android:text="LOG OUT"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/round_selector"
+                android:background="@drawable/gradient_bg_button"
+                android:text="@string/log_out_cap"
+                android:textColor="@color/movieGray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_pass" />
 

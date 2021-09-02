@@ -69,16 +69,14 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
             Constants.MOVIE_TYPE_POPULAR -> {
                 mSharedViewModel.selectedMoviePop.observe(viewLifecycleOwner, Observer { movies ->
                     mainBinding.run {
-
                         mSharedViewModel.selectedMoviePop.observe(viewLifecycleOwner, Observer {
-
-
                             if (it != null) {
                                 mainBinding.textViewTitle.text = it.title
-
                                 mainBinding.textViewOverview.text = it.overview
-
-                                mainBinding.voteAverage.text = movies.vote_average.toString()
+                                mainBinding.dRelease.text = it.release_date
+                                mainBinding.dLanguage.text = it.original_language
+                                mainBinding.dRating.rating = (it.vote_average/2).toFloat()
+                                mainBinding.dAverage.text = (it.popularity).toString()
 
                                 PicassoHelper.picassoOkhttp(
                                     mContext,
@@ -97,19 +95,15 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
                 })
             }
             Constants.MOVIE_TYPE_TOP_RATED -> {
-
                 mSharedViewModel.selectedMovieTopRated.observe(viewLifecycleOwner, Observer { movies ->
-
-
-
-
-
                     mainBinding.run {
                         if (movies != null) {
                             mainBinding.textViewTitle.text = movies.title
-
                             mainBinding.textViewOverview.text = movies.overview
-                            mainBinding.voteAverage.text = movies.vote_average.toString()
+                            mainBinding.dRelease.text = movies.release_date
+                            mainBinding.dLanguage.text = movies.original_language
+                            mainBinding.dRating.rating = (movies.vote_average/2).toFloat()
+                            mainBinding.dAverage.text = (movies.popularity).toString()
 
                             PicassoHelper.picassoOkhttp(
                                 mContext,
@@ -124,12 +118,8 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
                             )
                         }
                     }
-
                 })
-
             }
         }
-
-
     }
 }

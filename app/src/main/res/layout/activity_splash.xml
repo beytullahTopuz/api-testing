@@ -8,26 +8,22 @@
     android:background="@drawable/gradient_bg"
     tools:context=".ui.activity.SplashActivity">
 
-
     <ImageView
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo"
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:layout_margin="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MOVIE APP"
-        android:textColor="#333333"
+        android:text="@string/movie_app"
+        android:textAllCaps="true"
+        android:textColor="@color/movieGray"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:textSize="45sp"
-/>
-
-
-
-
+        android:textSize="45sp" />
 </LinearLayout>
