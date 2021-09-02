@@ -1,13 +1,13 @@
-package com.t4zb.kotlinapitesting.ui.fragment
+package com.t4zb.kotlinapitesting.ui.fragment.profile
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
 import com.google.android.material.appbar.AppBarLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.FragmentUserProfileBinding
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
@@ -22,7 +22,8 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
     AppBarLayout.OnOffsetChangedListener {
     private lateinit var mContext: FragmentActivity
     private lateinit var mBinding: FragmentUserProfileBinding
-
+    private val mViewModel : ProfileViewModel by viewModels()
+    private lateinit var firebaseAuth: FirebaseAuth
     private val mPresenter: BasePresenter by lazy {
         BasePresenter(this)
     }
@@ -31,6 +32,13 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentUserProfileBinding.bind(view)
         mPresenter.onViewsCreated()
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        mBinding.buttonSignout.setOnClickListener {
+            mViewModel.singOut(firebaseAuth)
+        }
+       // mBinding.textViewName.text = mViewModel.getUserEmail(firebaseAuth)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

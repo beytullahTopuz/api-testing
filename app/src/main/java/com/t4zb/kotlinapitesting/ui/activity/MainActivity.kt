@@ -8,6 +8,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.google.android.material.transition.MaterialFadeThrough
+import com.google.firebase.auth.FirebaseAuth
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.ActivityMainBinding
 import com.t4zb.kotlinapitesting.ui.fragment.HomeFragmentDirections
@@ -45,8 +46,27 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
                     }
                     2->{
-                        val directions = HomeFragmentDirections.actionHomeFragmentDirectionToProfileFragment()
-                        findNavController(R.id.nav_host_fragment).navigate(directions)
+                        var currentUser = FirebaseAuth.getInstance().currentUser
+
+                        if (currentUser == null) {
+
+                            //login fragment
+                          var directions =
+                                HomeFragmentDirections.actionHomeFragmentDirectionToLoginFragment()
+                            findNavController(R.id.nav_host_fragment).navigate(directions)
+
+
+                            // register fragment
+                           /* val directions =
+                                 HomeFragmentDirections.actionHomeFragmentDirectionToRegisterFragment()
+                             findNavController(R.id.nav_host_fragment).navigate(directions)
+                          */
+                        } else {//profile fragment
+
+                            val directions =
+                                HomeFragmentDirections.actionHomeFragmentDirectionToProfileFragment()
+                            findNavController(R.id.nav_host_fragment).navigate(directions)
+                        }
                     }
                 }
             }

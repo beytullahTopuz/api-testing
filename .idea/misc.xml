@@ -7,6 +7,11 @@
         <entry key="..\:/Users/beytullah/Desktop/huawei project/api-testing/app/src/main/res/drawable/gradient_bg.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/beytullah/Desktop/huawei project/api-testing/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/beytullah/Desktop/huawei project/api-testing/app/src/main/res/layout/activity_splash.xml" value="0.136" />
+        <entry key="..\:/Users/beytullah/Desktop/huawei project/new11/api-testing/app/src/main/res/drawable/account.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/beytullah/Desktop/huawei project/new11/api-testing/app/src/main/res/layout/fragment_login.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/beytullah/Desktop/huawei project/new11/api-testing/app/src/main/res/layout/fragment_register.xml" value="0.15896739130434784" />
+        <entry key="..\:/Users/beytullah/Desktop/huawei project/new11/api-testing/app/src/main/res/layout/fragment_user_profile.xml" value="0.152" />
+        <entry key="..\:/Users/beytullah/Desktop/huawei project/new11/api-testing/app/src/main/res/layout/widget_header_profile.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/beytullah/Desktop/huawei project/new4/api-testing/app/src/main/res/layout/activity_main.xml" value="0.22010869565217392" />
         <entry key="..\:/Users/beytullah/Desktop/huawei project/new4/api-testing/app/src/main/res/layout/activity_splash.xml" value="0.16041666666666668" />
         <entry key="..\:/Users/beytullah/Desktop/huawei project/new4/api-testing/app/src/main/res/layout/fragment_home.xml" value="0.2" />
@@ -35,7 +40,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
