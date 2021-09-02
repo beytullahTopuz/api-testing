@@ -6,6 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.t4zb.kotlinapitesting.util.showLogDebug
 
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.t4zb.kotlinapitesting.util.Constants
+
 
 class RegisterViewModel : ViewModel() {
 
@@ -14,6 +18,8 @@ class RegisterViewModel : ViewModel() {
     var str_email: Editable? = null
     var str_password: Editable? = null
     var str_passwordConfirm: Editable? = null
+
+    private val firastoreDB = Firebase.firestore
 
     val registerViewState: MutableLiveData<RegisterViewState> = MutableLiveData()
 
@@ -82,6 +88,30 @@ class RegisterViewModel : ViewModel() {
 
     }
 
+    private fun saveToDB(firebaseAuth: FirebaseAuth) {
+
+        firastoreDB.collection(Constants.FIRABASE_COLLECTION_USER)
+            .document(firebaseAuth.currentUser!!.uid).set(
+
+                hashMapOf(
+                    "name" to str_name.toString(),
+                    "surname" to str_surname.toString(),
+                    "email" to str_email.toString(),
+                    "fotoURL" to ""
+                )
+            ).addOnCompleteListener { taskResult ->
+                if (taskResult.isSuccessful) {
+
+                    showLogDebug(TAG,"User inserted to DB")
+                }else{
+                        firebaseAuth.currentUser!!.delete()
+                    showLogDebug(TAG,"ERROR : ${taskResult.exception?.message}")
+                }
+
+            }
+
+    }
+
 
     private fun registerWithEmail(firebaseAuth: FirebaseAuth) {
         firebaseAuth.createUserWithEmailAndPassword(str_email.toString(), str_password.toString())
@@ -91,7 +121,8 @@ class RegisterViewModel : ViewModel() {
                         isSuccess = true,
                         isLoading = false
                     )
-                    showLogDebug(TAG,"login successful")
+                    saveToDB(firebaseAuth)
+                    showLogDebug(TAG, "login successful")
                 } else {
                     registerViewState.value = currentRegisterViewState().copy(
                         isLoading = false,

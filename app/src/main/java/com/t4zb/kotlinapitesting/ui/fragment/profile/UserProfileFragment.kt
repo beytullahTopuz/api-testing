@@ -10,6 +10,8 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.FragmentUserProfileBinding
+import com.t4zb.kotlinapitesting.helper.PicassoHelper
+import com.t4zb.kotlinapitesting.modelLayer.UserModel
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
 import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
@@ -32,17 +34,40 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentUserProfileBinding.bind(view)
         mPresenter.onViewsCreated()
-
-        firebaseAuth = FirebaseAuth.getInstance()
+         mViewModel.getUserToDB(firebaseAuth)
+  //      firebaseAuth = FirebaseAuth.getInstance()
 
         mBinding.buttonSignout.setOnClickListener {
             mViewModel.singOut(firebaseAuth)
         }
-       // mBinding.textViewName.text = mViewModel.getUserEmail(firebaseAuth)
+
+        mViewModel.user.observe(viewLifecycleOwner){
+            render(it)
+        }
+
+
+
+    }
+
+    //HATALI
+    private fun renderImage(imageURL: String){
+        showLogDebug(TAG,imageURL)
+        if (imageURL != ""){
+            PicassoHelper.picassoOkhttp(mContext,imageURL,mBinding.toolbarHeaderView.image)
+        }
+    }
+
+    private fun render(userModel: UserModel){
+
+        renderImage(userModel.avatar_url.toString())
+        mBinding.profileEmailAddress.setText(userModel.email)
+        mBinding.profileName.setText("${userModel.name} ${userModel.surname}")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         mContext = requireActivity()
+        firebaseAuth = FirebaseAuth.getInstance()
+        mViewModel.getUserEmail(firebaseAuth)
         super.onCreate(savedInstanceState)
     }
 

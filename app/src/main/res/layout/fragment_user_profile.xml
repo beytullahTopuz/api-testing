@@ -45,6 +45,8 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin">
 
+
+
                 <include
                     android:id="@+id/toolbar_header_view"
                     android:layout_width="match_parent"
@@ -52,6 +54,7 @@
                     layout="@layout/widget_header_profile"
                     android:layout_marginStart="30dp"
                     app:layout_behavior=".helper.HeaderBehaviorHelper" />
+
 
             </androidx.appcompat.widget.Toolbar>
 

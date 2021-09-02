@@ -15,5 +15,6 @@ class Constants {
         const val LANGUAGE = "en"
         const val MOVIE_TYPE_POPULAR = "MOVIE POPULAR"
         const val MOVIE_TYPE_TOP_RATED = "MOVIE TOP RATED"
+        const val FIRABASE_COLLECTION_USER = "user"
     }
 }

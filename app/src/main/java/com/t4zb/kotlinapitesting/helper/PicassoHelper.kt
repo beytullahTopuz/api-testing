@@ -2,6 +2,7 @@ package com.t4zb.kotlinapitesting.helper
 
 import android.content.Context
 import android.widget.ImageView
+import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import com.t4zb.kotlinapitesting.modelLayer.rest.core.ImageUrlCore
