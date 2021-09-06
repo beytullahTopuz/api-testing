@@ -1,5 +1,6 @@
 package com.t4zb.kotlinapitesting.ui.fragment
 
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -64,6 +65,19 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
     }
 
     override fun initializeViews() {
+
+
+        mainBinding.shareButton.setOnClickListener {
+            var dialog = AlertDialog.Builder(mContext)
+
+            val inflater = this.layoutInflater
+            val dialogView: View = inflater.inflate(R.layout.share_alert_dialog,null)
+
+            dialog.setView(dialogView)
+
+
+            dialog.show()
+        }
 
         when (mSharedViewModel.movieType.value) {
             Constants.MOVIE_TYPE_POPULAR -> {

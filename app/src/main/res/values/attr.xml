@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="color_primary" format="color"/>
+
+    <attr name="textColorLIGHT" format="color"/>
+    <attr name="textColorDARK" format="color"/>
+    <attr name="backgraundLIGHT" format="color"/>
+    <attr name="backgraundDARK" format="color"/>
+    <attr name="buttomNavigationBarLIGHT" format="color"/>
+    <attr name="buttomNavigationBarDARK" format="color"/>
+    <attr name="buttomNavigationBarItemLIGHT" format="color"/>
+    <attr name="buttomNavigationBarItemDARK" format="color"/>
+    <attr name="signINButtonColor" format="color"/>
+    <attr name="signUpButtonColor" format="color"/>
+    <attr name="editTextBackgraundLIGHT" format="color"/>
+    <attr name="editTextBackgraundDARK" format="color"/>
+    <attr name="editTextTextColorLIGHT" format="color"/>
+    <attr name="editTextTextColorDARK" format="color"/>
 </resources>

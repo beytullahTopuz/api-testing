@@ -19,4 +19,21 @@
     <color name="colorRightBubbleFade">#55EE577F</color>
     <color name="colorLeftBubble">#FDAE7A</color>
     <color name="colorLeftBubbleFade">#55FDAE7A</color>
+
+    <!--CUSTOM COLORS -->
+    <color name="textColorLIGHT">#000000</color>
+    <color name="textColorDARK">#F2F2F2</color>
+    <color name="backgraundLIGHT">#FFFFFFFF</color>
+    <color name="backgraundDARK">#222831</color>
+    <color name="buttomNavigationBarLIGHT">#FFFFFFFF</color>
+    <color name="buttomNavigationBarDARK">#A42020</color>
+    <color name="buttomNavigationBarItemLIGHT">#A42020</color>
+    <color name="buttomNavigationBarItemDARK">#FFFFFFFF</color>
+    <color name="signINButtonColor">#323335</color>
+    <color name="signUpButtonColor">#A42020</color>
+    <color name="editTextBackgraundLIGHT">#F2F2F2</color>
+    <color name="editTextBackgraundDARK">#323335</color>
+    <color name="editTextTextColorLIGHT">#FFFFFFFF</color>
+    <color name="editTextTextColorDARK">#333333</color>
+
 </resources>

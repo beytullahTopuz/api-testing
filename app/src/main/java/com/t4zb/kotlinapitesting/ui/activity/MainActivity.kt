@@ -59,6 +59,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                     }
                     1 -> {
 
+                        var directions =
+                            HomeFragmentDirections.actionHomeFragmentDirectionToFavoriteFragment()
+                        findNavController(R.id.nav_host_fragment).navigate(directions)
                     }
                     2 -> {
 
