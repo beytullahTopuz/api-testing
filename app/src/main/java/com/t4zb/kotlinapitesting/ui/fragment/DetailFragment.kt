@@ -1,9 +1,11 @@
 package com.t4zb.kotlinapitesting.ui.fragment
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +27,8 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
     private lateinit var mSharedViewModel: SharedViewModel
 
     private lateinit var mainBinding: FragmentDetailBinding
+
+    private lateinit var dialog: Dialog
 
     private val mPresenter: BasePresenter by lazy {
         BasePresenter(this)
@@ -64,19 +68,22 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
 
     }
 
+    private fun initDialog(type: Int){
+        val dialog = Dialog(mContext,R.style.BlurTheme)
+        dialog.window!!.attributes.windowAnimations = type
+        dialog.setContentView(R.layout.share_alert_dialog)
+        dialog.setCanceledOnTouchOutside(true)
+
+        val sdShareLink = dialog.findViewById<LinearLayout>(R.id.sd_share_link)
+
+
+
+        dialog.show()
+    }
+
     override fun initializeViews() {
-
-
         mainBinding.shareButton.setOnClickListener {
-            var dialog = AlertDialog.Builder(mContext)
-
-            val inflater = this.layoutInflater
-            val dialogView: View = inflater.inflate(R.layout.share_alert_dialog,null)
-
-            dialog.setView(dialogView)
-
-
-            dialog.show()
+            initDialog(R.style.DialogSlide)
         }
 
         when (mSharedViewModel.movieType.value) {

@@ -8,15 +8,22 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.t4zb.kotlinapitesting.R
+import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.databinding.FragmentUserProfileBinding
+import com.t4zb.kotlinapitesting.helper.FirebaseDbHelper
 import com.t4zb.kotlinapitesting.helper.PicassoHelper
 import com.t4zb.kotlinapitesting.modelLayer.UserModel
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
 import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
+import com.t4zb.kotlinapitesting.util.FirebaseConstants
 import com.t4zb.kotlinapitesting.util.ViewUtils
 import com.t4zb.kotlinapitesting.util.showLogDebug
+import com.t4zb.kotlinapitesting.util.showLogError
 import kotlin.math.abs
 
 
@@ -24,7 +31,7 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
     AppBarLayout.OnOffsetChangedListener {
     private lateinit var mContext: FragmentActivity
     private lateinit var mBinding: FragmentUserProfileBinding
-    private val mViewModel : ProfileViewModel by viewModels()
+    private val mViewModel: ProfileViewModel by viewModels()
     private lateinit var firebaseAuth: FirebaseAuth
     private val mPresenter: BasePresenter by lazy {
         BasePresenter(this)
@@ -34,33 +41,41 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentUserProfileBinding.bind(view)
         mPresenter.onViewsCreated()
-         mViewModel.getUserToDB(firebaseAuth)
-  //      firebaseAuth = FirebaseAuth.getInstance()
+        mViewModel.getUserToDB(firebaseAuth)
+        firebaseAuth = FirebaseAuth.getInstance()
 
         mBinding.buttonSignout.setOnClickListener {
             mViewModel.singOut(firebaseAuth)
         }
-
-        mViewModel.user.observe(viewLifecycleOwner){
-            render(it)
-        }
-
-
-
+        render()
     }
 
     //HATALI
-    private fun renderImage(imageURL: String){
-        showLogDebug(TAG,imageURL)
-        if (imageURL != ""){
-            PicassoHelper.picassoUtils(mContext,imageURL,mBinding.toolbarBannerProfile)
+    private fun renderImage(imageURL: String) {
+        showLogDebug(TAG, imageURL)
+        if (imageURL != "") {
+            PicassoHelper.picassoUtils(mContext, imageURL, mBinding.toolbarBannerProfile)
         }
     }
 
-    private fun render(userModel: UserModel){
-        renderImage(userModel.avatar_url.toString())
-        mBinding.profileEmailAddress.setText(userModel.email)
-        mBinding.profileName.setText("${userModel.name} ${userModel.surname}")
+    private fun render() {
+        val firebaseDB = FirebaseDbHelper.getUserInfo(AppUser.getFirebaseUser()!!.uid)
+        firebaseDB.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val name = snapshot.child(FirebaseConstants.PATH_NAME).value.toString()
+                val surname = snapshot.child(FirebaseConstants.PATH_SURNAME).value.toString()
+                val avatar = snapshot.child(FirebaseConstants.PATH_AVATAR).value.toString()
+                val email = snapshot.child(FirebaseConstants.PATH_EMAIL).value.toString()
+
+                renderImage(avatar)
+                mBinding.profileEmailAddress.setText(email)
+                mBinding.profileName.setText(name)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                showLogError(TAG, error.toString())
+            }
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +97,8 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
         } else if (perc < .9f) {
             mBinding.toolbarProfile.visibility = View.INVISIBLE
             mBinding.toolbarBannerProfile.visibility = View.VISIBLE
-            mBinding.toolbarProfile.background = ContextCompat.getDrawable(mContext, R.color.transparent)
+            mBinding.toolbarProfile.background =
+                ContextCompat.getDrawable(mContext, R.color.transparent)
         }
     }
 
@@ -110,7 +126,7 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
         )
     }
 
-    companion object{
+    companion object {
         private const val TAG = "UserProfileFragment"
     }
 }

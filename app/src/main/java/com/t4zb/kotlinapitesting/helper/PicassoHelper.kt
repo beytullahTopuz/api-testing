@@ -25,17 +25,8 @@ import java.lang.Exception
 object PicassoHelper {
 
     fun picassoUtils(context: Context,pictureUrl: String, imageView: ShapeableImageView){
-        val builder = Picasso.Builder(context.applicationContext)
-        Picasso.get().load(pictureUrl).networkPolicy(NetworkPolicy.OFFLINE)
-            .fit().centerCrop().into(imageView, object: Callback{
-                override fun onSuccess() {
-
-                }
-
-                override fun onError(e: Exception?) {
-
-                }
-            })
+        Picasso.get().load(pictureUrl)
+            .fit().centerCrop().into(imageView)
     }
 
     fun picassoOkhttp(context: Context, pictureUrl: String, imageView: ImageView) {

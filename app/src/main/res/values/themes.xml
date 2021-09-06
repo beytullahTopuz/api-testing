@@ -17,10 +17,16 @@
 
     <style name="LightMode" parent="Theme.MaterialComponents.DayNight.DarkActionBar" >
         <item name="color_primary">@color/purple_500</item>
+        <item name="color_textColor">@color/textColorLIGHT</item>
+        <item name="buttomNavigationBar">@color/buttomNavigationBarItemLIGHT</item>
+        <item name="color_background">@color/backgraundLIGHT</item>
     </style>
 
     <style name="DarkMode" parent="Theme.MaterialComponents.DayNight.DarkActionBar" >
         <item name="color_primary">@color/white</item>
+        <item name="color_textColor">@color/textColorDARK</item>
+        <item name="buttomNavigationBar">@color/buttomNavigationBarDARK</item>
+        <item name="color_background">@color/backgraundDARK</item>
     </style>
 
     <style name="bar_item1" parent="Widget.MaterialComponents.BottomNavigationView">

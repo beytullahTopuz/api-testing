@@ -2,18 +2,12 @@
 <resources>
     <attr name="color_primary" format="color"/>
 
-    <attr name="textColorLIGHT" format="color"/>
-    <attr name="textColorDARK" format="color"/>
-    <attr name="backgraundLIGHT" format="color"/>
-    <attr name="backgraundDARK" format="color"/>
-    <attr name="buttomNavigationBarLIGHT" format="color"/>
-    <attr name="buttomNavigationBarDARK" format="color"/>
-    <attr name="buttomNavigationBarItemLIGHT" format="color"/>
-    <attr name="buttomNavigationBarItemDARK" format="color"/>
+    <attr name="color_textColor" format="color"/>
+    <attr name="color_background" format="color"/>
+    <attr name="buttomNavigationBar" format="color"/>
+    <attr name="buttomNavigationBarItem" format="color"/>
     <attr name="signINButtonColor" format="color"/>
     <attr name="signUpButtonColor" format="color"/>
-    <attr name="editTextBackgraundLIGHT" format="color"/>
-    <attr name="editTextBackgraundDARK" format="color"/>
-    <attr name="editTextTextColorLIGHT" format="color"/>
-    <attr name="editTextTextColorDARK" format="color"/>
+    <attr name="editTextBackgraund" format="color"/>
+    <attr name="editTextTextColor" format="color"/>
 </resources>
