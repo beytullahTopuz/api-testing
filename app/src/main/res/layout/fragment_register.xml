@@ -190,6 +190,7 @@
                     android:id="@+id/signUpWithGoogle"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:contentDescription="@string/google_sign_in"
                     android:src="@drawable/google_brand_branding_logo_network_icon"/>
             </LinearLayout>
         </LinearLayout>

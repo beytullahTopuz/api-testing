@@ -53,12 +53,11 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
     private fun renderImage(imageURL: String){
         showLogDebug(TAG,imageURL)
         if (imageURL != ""){
-            PicassoHelper.picassoOkhttp(mContext,imageURL,mBinding.toolbarHeaderView.image)
+            PicassoHelper.picassoUtils(mContext,imageURL,mBinding.toolbarBannerProfile)
         }
     }
 
     private fun render(userModel: UserModel){
-
         renderImage(userModel.avatar_url.toString())
         mBinding.profileEmailAddress.setText(userModel.email)
         mBinding.profileName.setText("${userModel.name} ${userModel.surname}")

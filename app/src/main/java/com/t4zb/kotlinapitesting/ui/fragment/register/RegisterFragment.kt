@@ -1,22 +1,26 @@
 package com.t4zb.kotlinapitesting.ui.fragment.register
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.FragmentRegisterBinding
-import com.t4zb.kotlinapitesting.ui.contract.BaseContract
+import com.t4zb.kotlinapitesting.helper.GmsLoginHelper
+import com.t4zb.kotlinapitesting.ui.contract.LoginHelper
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
-import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
+import com.t4zb.kotlinapitesting.ui.presenter.LoginPresenter
 
 
-class RegisterFragment : BaseFragment(R.layout.fragment_register), BaseContract.ViewMain {
+class RegisterFragment : BaseFragment(R.layout.fragment_register), LoginPresenter.LoginContract {
 
     private lateinit var mContext: FragmentActivity
 
@@ -26,20 +30,26 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register), BaseContract.
 
     private lateinit var firebaseAuth: FirebaseAuth
 
-    private val mPresenter: BasePresenter by lazy {
-        BasePresenter(this)
+    private val loginHelperBuild: GmsLoginHelper by lazy {
+        GmsLoginHelper(mContext)
     }
+
+    private val gLoginHelper: LoginHelper by lazy {
+        GmsLoginHelper(mContext)
+    }
+
+    private val presenter: LoginPresenter by lazy { LoginPresenter(this, gLoginHelper) }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         mainBinding = FragmentRegisterBinding.bind(view)
-        mPresenter.onViewsCreated()
+        presenter.onViewsCreate()
         firebaseAuth = FirebaseAuth.getInstance()
 
 
-        mViewModel.registerViewState.observe(viewLifecycleOwner,{ registerViewState->
+        mViewModel.registerViewState.observe(viewLifecycleOwner, { registerViewState ->
 
             render(registerViewState)
         })
@@ -49,9 +59,11 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register), BaseContract.
 
             mViewModel.btn_register_onclick(firebaseAuth)
         }
-        mainBinding.signUpWithGoogle.setOnClickListener{
+        mainBinding.signUpWithGoogle.setOnClickListener {
 
-            mViewModel.btn_register_with_google(firebaseAuth)
+            //mViewModel.btn_register_with_google(firebaseAuth)
+            presenter.onSignInGClick()
+
         }
 
         mViewModel.str_name = mainBinding.signUpTextName.text;
@@ -68,28 +80,43 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register), BaseContract.
     }
 
 
-    private fun render(viewState:RegisterViewState) {
-        if (viewState.isLoading == true){
+    private fun render(viewState: RegisterViewState) {
+        if (viewState.isLoading) {
             mainBinding.registerProgressBar.visibility = View.VISIBLE
-        }else{
+        } else {
             mainBinding.registerProgressBar.visibility = View.INVISIBLE
         }
 
-        if (viewState.isFail == true){
-            Toast.makeText(mContext,viewState.errorMsg, Toast.LENGTH_LONG).show()
+        if (viewState.isFail) {
+            Toast.makeText(mContext, viewState.errorMsg, Toast.LENGTH_LONG).show()
         }
 
-        if (viewState.isSuccess == true){
-            Toast.makeText(mContext,"register successful", Toast.LENGTH_LONG).show()
+        if (viewState.isSuccess) {
+            Toast.makeText(mContext, "register successful", Toast.LENGTH_LONG).show()
         }
 
     }
 
     companion object {
+        private const val TAG = "RegisterFragment"
     }
 
-    override fun setupViewModel() {
+    override fun redirectToUserProfile() {
+        // Navigation
+        findNavController().navigate(R.id.action_registerFragment_to_profileFragment)
+    }
 
+    override fun restartApp() {
+
+    }
+
+    override fun redirectToSignIn(signInIntent: Intent, requestCode: Int) {
+        startActivityForResult(signInIntent, requestCode)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        gLoginHelper.onDataReceived(requestCode, resultCode, data)
     }
 
     override fun initializeViews() {

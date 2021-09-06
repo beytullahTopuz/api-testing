@@ -30,4 +30,6 @@
     <string name="top_rated">Top Rated</string>
     <string name="popular">Popular</string>
     <string name="movie_app">MOVIE APP</string>
+    <string name="google_sign_in">Google Sign in</string>
+    <string name="error_no_perm">No permissions were granted!</string>
 </resources>
