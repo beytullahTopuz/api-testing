@@ -87,7 +87,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
             initDialog(R.style.DialogSlide)
         }
         mainBinding.likeButton.setOnClickListener {
-            GmsFavoriteHelper(mContext).insertFavorite(mSharedViewModel.)
+           // GmsFavoriteHelper(mContext).insertFavorite(mSharedViewModel.selectedMovieTopRated)
         }
 
         when (mSharedViewModel.movieType.value) {
