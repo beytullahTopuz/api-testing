@@ -4,55 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC107"
+    android:background="@drawable/dr_strange"
     tools:context=".ui.fragment.login.LoginFragment">
 
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="LOGIN"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView9"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginHorizontal="8dp"
-        app:cardCornerRadius="22dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/scrim_bottom">
 
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="260dp"
+            android:text="LOGIN"
+            android:textColor="@color/white"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+
+
+
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
 
+
+
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:background="@drawable/bg_reg_edit"
+                        android:layout_marginHorizontal="@dimen/margin_reg_edit_text_horizontal"
+                        android:textColorHint="@color/movieGray"
+                        android:layout_marginBottom="@dimen/margin_reg_edit_text_bottom"
                         app:startIconDrawable="@drawable/mail">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -63,76 +70,90 @@
                             android:inputType="textEmailAddress"
                             android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
-                    <Space android:layout_width="0dp" android:layout_height="8dp" />
+
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        app:startIconDrawable="@drawable/password"
-                        app:passwordToggleEnabled="true">
+                        app:passwordToggleEnabled="true"
+                        android:layout_marginHorizontal="@dimen/margin_reg_edit_text_horizontal"
+                        android:background="@drawable/bg_reg_edit"
+                        android:layout_marginBottom="@dimen/margin_reg_edit_text_bottom"
+                        android:textColorHint="@color/movieGray"
+                        app:startIconDrawable="@drawable/password">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/loginPasswordTextField"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Password"
-                            android:singleLine="true"
-                            android:inputType="textPassword" />
+                            android:inputType="textPassword"
+                            android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginBottom="@dimen/margin_reg_edit_text_bottom"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/loginUpWithGoogleBtn"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_google" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="30dp"
+                        android:weightSum="2">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/loginBtn"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="11dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_sign_in"
+                            android:text="SIGN IN"
+                            android:textColor="@color/textColorDARK" />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/registerBtn"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_sign_up"
+                            android:text="Sign UP"
+                            android:textColor="@color/textColorDARK"/>
+
+                    </LinearLayout>
+
+
+
                 </LinearLayout>
+
+
             </ScrollView>
-            <Space android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
-            <Button
-                android:id="@+id/loginBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="LOGIN" />
-            <Space android:layout_width="0dp" android:layout_height="8dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Do you have not an account? "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Register"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <Space android:layout_width="0dp" android:layout_height="8dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Login With"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <Space android:layout_width="0dp" android:layout_height="8dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/loginUpWithGoogleBtn"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/google_brand_branding_logo_network_icon"/>
-            </LinearLayout>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="8dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

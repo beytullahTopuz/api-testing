@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.transition.MaterialContainerTransform
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.FragmentDetailBinding
+import com.t4zb.kotlinapitesting.helper.GmsFavoriteHelper
 import com.t4zb.kotlinapitesting.helper.PicassoHelper
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
@@ -84,6 +85,9 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
     override fun initializeViews() {
         mainBinding.shareButton.setOnClickListener {
             initDialog(R.style.DialogSlide)
+        }
+        mainBinding.likeButton.setOnClickListener {
+            GmsFavoriteHelper(mContext).insertFavorite(mSharedViewModel.)
         }
 
         when (mSharedViewModel.movieType.value) {

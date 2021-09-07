@@ -4,6 +4,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
+import com.t4zb.kotlinapitesting.util.Constants
 
 /**
  * 功能描述
@@ -31,5 +32,8 @@ object FirebaseDbHelper {
 
     fun getUserInfo(userID : String) : DatabaseReference {
         return FirebaseDatabase.getInstance().reference.child("UserInfo").child(userID)
+    }
+    fun getMoviesFavorite(): DatabaseReference{
+        return  rootRef().child(Constants.FIRABASE_COLLECTION_MOVIES_FAVORITE)
     }
 }
