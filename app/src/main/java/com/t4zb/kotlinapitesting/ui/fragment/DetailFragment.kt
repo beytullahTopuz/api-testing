@@ -13,6 +13,7 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.FragmentDetailBinding
 import com.t4zb.kotlinapitesting.helper.GmsFavoriteHelper
+import com.t4zb.kotlinapitesting.helper.MoviesFavorite
 import com.t4zb.kotlinapitesting.helper.PicassoHelper
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
@@ -87,7 +88,15 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
             initDialog(R.style.DialogSlide)
         }
         mainBinding.likeButton.setOnClickListener {
-           // GmsFavoriteHelper(mContext).insertFavorite(mSharedViewModel.selectedMovieTopRated)
+        /*    var moviesFavorite : MoviesFavorite
+            if (mSharedViewModel.movieType.value == Constants.MOVIE_TYPE_TOP_RATED){
+                moviesFavorite =MoviesFavorite (mSharedViewModel.selectedMovieTopRated.value)
+            }
+            if (mSharedViewModel.movieType.value == Constants.MOVIE_TYPE_POPULAR){
+
+            }
+            GmsFavoriteHelper(mContext).insertFavorite(moviesFavorite)
+            */
         }
 
         when (mSharedViewModel.movieType.value) {
