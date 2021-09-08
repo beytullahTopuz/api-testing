@@ -20,7 +20,7 @@ class FavoriteFragment(context: Context) : Fragment() {
     }
 
     init {
-        GmsFavoriteHelper(mContext).getFavoriteList()
+        //GmsFavoriteHelper(mContext).getFavoriteList()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -1,16 +1,18 @@
 package com.t4zb.kotlinapitesting.ui.adapter
 
+import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.transition.MaterialElevationScale
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.helper.PicassoHelper
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
@@ -42,6 +44,10 @@ class MoviePopAdapter(
         val cardImage: ImageView = parent.findViewById(R.id.card_image_view)
         val textView: TextView = parent.findViewById(R.id.textViewMovieName)
         val transitioningCard: MaterialCardView = parent.findViewById(R.id.transition_card_item)
+        val frontCard: LinearLayout = parent.findViewById(R.id.front_card)
+        val backCard: LinearLayout = parent.findViewById(R.id.back_card)
+        val fav: TextView = parent.findViewById(R.id.back_card_fav)
+        val cancel :TextView = parent.findViewById(R.id.back_card_cancel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -65,6 +71,9 @@ class MoviePopAdapter(
             }
         }
 
+        val frontAnim = AnimatorInflater.loadAnimator(mContext, R.animator.front_animator) as AnimatorSet
+        val backAnim = AnimatorInflater.loadAnimator(mContext, R.animator.back_animator) as AnimatorSet
+
         holder.transitioningCard.setOnClickListener {
 
             val transitionName = mContext.getString(R.string.detail_card_transition)
@@ -75,6 +84,23 @@ class MoviePopAdapter(
             mViewModel.movieType.value = Constants.MOVIE_TYPE_POPULAR
             findNavController(holder.parent).navigate(direction, extras)
             showLogDebug(TAG, "Movie: ${mViewModel.selectedMoviePop.value.toString()}")
+        }
+        holder.transitioningCard.setOnLongClickListener {
+            frontAnim.setTarget(holder.frontCard)
+            backAnim.setTarget(holder.backCard)
+            frontAnim.start()
+            backAnim.start()
+            holder.frontCard.visibility = View.GONE
+            holder.backCard.visibility = View.VISIBLE
+            holder.cancel.setOnClickListener {
+                frontAnim.setTarget(holder.backCard)
+                backAnim.setTarget(holder.frontCard)
+                frontAnim.start()
+                backAnim.start()
+                holder.frontCard.visibility = View.VISIBLE
+                holder.backCard.visibility = View.GONE
+            }
+            true
         }
     }
 

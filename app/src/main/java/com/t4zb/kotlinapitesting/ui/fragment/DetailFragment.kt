@@ -15,6 +15,7 @@ import com.t4zb.kotlinapitesting.databinding.FragmentDetailBinding
 import com.t4zb.kotlinapitesting.helper.GmsFavoriteHelper
 import com.t4zb.kotlinapitesting.helper.MoviesFavorite
 import com.t4zb.kotlinapitesting.helper.PicassoHelper
+import com.t4zb.kotlinapitesting.helper.SwipeDismissActions
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
 import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
@@ -98,6 +99,8 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
             GmsFavoriteHelper(mContext).insertFavorite(moviesFavorite)
             */
         }
+
+        SwipeDismissActions.fragmentDismiss(mainBinding.transitionCard,mContext)
 
         when (mSharedViewModel.movieType.value) {
             Constants.MOVIE_TYPE_POPULAR -> {
