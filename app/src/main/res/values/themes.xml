@@ -18,7 +18,8 @@
     <style name="LightMode" parent="Theme.MaterialComponents.DayNight.DarkActionBar" >
         <item name="color_primary">@color/purple_500</item>
         <item name="color_textColor">@color/textColorLIGHT</item>
-        <item name="buttomNavigationBar">@color/buttomNavigationBarItemLIGHT</item>
+        <item name="buttomNavigationBar">@color/buttomNavigationBarLIGHT</item>
+        <item name="buttomNavigationBarItem">@color/buttomNavigationBarItemLIGHT</item>
         <item name="color_background">@color/backgraundLIGHT</item>
         <item name="editTextBackgraund">@color/editTextBackgraundLIGHT</item>
         <item name="editTextTextColor">@color/editTextTextColorLIGHT</item>
@@ -28,6 +29,7 @@
         <item name="color_primary">@color/white</item>
         <item name="color_textColor">@color/textColorDARK</item>
         <item name="buttomNavigationBar">@color/buttomNavigationBarDARK</item>
+        <item name="buttomNavigationBarItem">@color/buttomNavigationBarItemDARK</item>
         <item name="color_background">@color/backgraundDARK</item>
         <item name="editTextBackgraund">@color/editTextBackgraundDARK</item>
         <item name="editTextTextColor">@color/buttomNavigationBarItemLIGHT</item>

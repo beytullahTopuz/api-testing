@@ -35,7 +35,13 @@ object FirebaseDbHelper {
         return rootRef().child("UserInfo").child(userID)
     }
 
-    fun getMoviesFavorite(): DatabaseReference {
-        return rootRef().child(AppUser.getFirebaseUser()!!.uid).child(Constants.FIRABASE_COLLECTION_MOVIES_FAVORITE)
+    fun createMoviesFavorite(): DatabaseReference {
+        return rootRef().child(Constants.FIRABASE_COLLECTION_MOVIES_FAVORITE)
+            .child(AppUser.getFirebaseUser()!!.uid)
+    }
+
+    fun getMoviesAll(): DatabaseReference {
+        return rootRef().child(Constants.FIRABASE_COLLECTION_MOVIES_FAVORITE)
+            .child(AppUser.getFirebaseUser()!!.uid)
     }
 }

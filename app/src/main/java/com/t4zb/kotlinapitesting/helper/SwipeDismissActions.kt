@@ -17,7 +17,7 @@ import com.t4zb.kotlinapitesting.util.showLogDebug
  */
 object SwipeDismissActions {
 
-    fun fragmentDismiss(view: View, contContext: Context){
+    fun fragmentDismiss(view: View){
         val swipe = SwipeDismissBehavior<MaterialCardView>()
         swipe.setSwipeDirection(SwipeDismissBehavior.SWIPE_DIRECTION_START_TO_END)
 

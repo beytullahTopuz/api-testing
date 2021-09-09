@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.t4zb.kotlinapitesting.R
+import com.t4zb.kotlinapitesting.modelLayer.rest.core.ImageUrlCore
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
-import com.t4zb.kotlinapitesting.ui.viewholder.FirebaseViewHolder
+import com.t4zb.kotlinapitesting.ui.viewholder.FirebasePopularityViewHolder
 import com.t4zb.kotlinapitesting.util.FirebaseConstants
 import com.t4zb.kotlinapitesting.util.showLogDebug
 import com.t4zb.kotlinapitesting.util.showLogError
@@ -17,17 +18,17 @@ object GmsFavoriteHelper {
     private const val TAG = "GmsFavoriteHelper"
 
     fun insertFavoritePop(moviesPopularity: MoviesPopularity) {
-        val favPopDbRef = FirebaseDbHelper.getMoviesFavorite()
+        val favPopDbRef = FirebaseDbHelper.createMoviesFavorite()
         val favPopMap = HashMap<String, String>()
         favPopMap[FirebaseConstants.ADULT] = moviesPopularity.adult.toString()
-        favPopMap[FirebaseConstants.BACKDROP_PATH] = moviesPopularity.backdrop_path
+        favPopMap[FirebaseConstants.BACKDROP_PATH] = ImageUrlCore.buildImageCore(moviesPopularity.backdrop_path)
         favPopMap[FirebaseConstants.GENRE_IDS] = moviesPopularity.genre_ids[0].toString()
         favPopMap[FirebaseConstants.ID] = moviesPopularity.id.toString()
         favPopMap[FirebaseConstants.ORIGINAL_LANGUAGE] = moviesPopularity.original_language
         favPopMap[FirebaseConstants.ORIGINAL_TITLE] = moviesPopularity.original_title
         favPopMap[FirebaseConstants.OVERVIEW] = moviesPopularity.overview
         favPopMap[FirebaseConstants.POPULARITY] = moviesPopularity.popularity.toString()
-        favPopMap[FirebaseConstants.POSTER_PATH] = moviesPopularity.poster_path
+        favPopMap[FirebaseConstants.POSTER_PATH] = ImageUrlCore.buildImageCore(moviesPopularity.poster_path)
         favPopMap[FirebaseConstants.RELEASE_DATE] = moviesPopularity.release_date
         favPopMap[FirebaseConstants.TITLE] = moviesPopularity.title
         favPopMap[FirebaseConstants.VIDEO] = moviesPopularity.video.toString()
@@ -45,11 +46,11 @@ object GmsFavoriteHelper {
     }
 
     fun insertFavoriteTOP(moviesTopRated: MoviesTopRated){
-        val favTopDbRef = FirebaseDbHelper.getMoviesFavorite()
+        val favTopDbRef = FirebaseDbHelper.createMoviesFavorite()
         val favTopMap = HashMap<String, String>()
 
         favTopMap[FirebaseConstants.POPULARITY] = moviesTopRated.popularity.toString()
-        favTopMap[FirebaseConstants.VOTE_COUNT] = moviesTopRated.vote_count.toString()
+        favTopMap[FirebaseConstants.VOTE_COUNT] = moviesTopRated.vote_count
         favTopMap[FirebaseConstants.POSTER_PATH] = moviesTopRated.poster_path
         favTopMap[FirebaseConstants.ID] = moviesTopRated.id.toString()
         favTopMap[FirebaseConstants.ADULT] = moviesTopRated.adult.toString()
@@ -60,8 +61,6 @@ object GmsFavoriteHelper {
         favTopMap[FirebaseConstants.VOTE_AVERAGE] = moviesTopRated.vote_average.toString()
         favTopMap[FirebaseConstants.OVERVIEW] = moviesTopRated.overview
         favTopMap[FirebaseConstants.RELEASE_DATE] = moviesTopRated.release_date
-
-
 
         favTopDbRef.setValue(favTopMap).addOnCompleteListener { taskResult->
             if (taskResult.isSuccessful) {
@@ -75,28 +74,28 @@ object GmsFavoriteHelper {
     }
 
     fun setFirebaseRecycler(recyclerView: RecyclerView) {
-        val options = FirebaseRecyclerOptions.Builder<MoviesPopularity>()
-            .setQuery(FirebaseDbHelper.getMoviesFavorite(), MoviesPopularity::class.java).build()
+        val options = FirebaseRecyclerOptions.Builder<MoviesFavorite>()
+            .setQuery(FirebaseDbHelper.getMoviesAll(), MoviesFavorite::class.java).build()
         val adapterFire =
-            object : FirebaseRecyclerAdapter<MoviesPopularity, FirebaseViewHolder>(options) {
+            object : FirebaseRecyclerAdapter<MoviesFavorite, FirebasePopularityViewHolder>(options) {
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
                     viewType: Int
-                ): FirebaseViewHolder {
+                ): FirebasePopularityViewHolder {
                     //Inflater
                     val view = LayoutInflater.from(parent.context)
                         .inflate(R.layout.item_card, parent, false)
-                    return FirebaseViewHolder(view)
+                    return FirebasePopularityViewHolder(view)
                 }
 
                 override fun onBindViewHolder(
-                    holder: FirebaseViewHolder,
+                    holderPopularity: FirebasePopularityViewHolder,
                     position: Int,
-                    model: MoviesPopularity
+                    model: MoviesFavorite
                 ) {
                     // Click item id
                     val lisResUID = getRef(position).key
-                    holder.bindUI()
+                    holderPopularity.bindUI(model)
                 }
             }
         adapterFire.startListening()
@@ -104,15 +103,15 @@ object GmsFavoriteHelper {
     }
 
     fun getFavoriteList() {
-        FirebaseDbHelper.getMoviesFavorite().get().addOnCompleteListener { taskResult ->
-            if (taskResult.isSuccessful) {
-
-            }
-        }
+//        FirebaseDbHelper.createMoviesFavorite().get().addOnCompleteListener { taskResult ->
+//            if (taskResult.isSuccessful) {
+//
+//            }
+//        }
     }
 
     fun deleteFavorites(favoriteID: String) {
-        FirebaseDbHelper.getMoviesFavorite().child(favoriteID).removeValue()
+        FirebaseDbHelper.createMoviesFavorite().removeValue()
             .addOnCompleteListener { taskResult ->
                 if (taskResult.isSuccessful) {
                     showLogDebug(TAG, taskResult.result.toString())

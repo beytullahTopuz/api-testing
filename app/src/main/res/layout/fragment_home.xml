@@ -11,7 +11,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
-        android:background="@color/movieGray"
+        android:background="?attr/buttomNavigationBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -42,6 +42,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="?attr/buttomNavigationBar"
                 app:layout_collapseMode="pin">
 
                 <include

@@ -109,7 +109,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
 
         }
 
-        SwipeDismissActions.fragmentDismiss(mainBinding.transitionCard,mContext)
+        SwipeDismissActions.fragmentDismiss(mainBinding.transitionCard)
 
         when (mSharedViewModel.movieType.value) {
             Constants.MOVIE_TYPE_POPULAR -> {

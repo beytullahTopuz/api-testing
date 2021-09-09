@@ -1,18 +1,18 @@
 package com.t4zb.kotlinapitesting.helper
 
 data class MoviesFavorite(
-    val adult: Boolean,
+    val adult: String,
     val backdrop_path: String,
-    val genre_ids: List<Int>,
-    val id: Int,
+    val genre_ids: String,
+    val id: String,
     val original_language: String,
     val original_title: String,
     val overview: String,
-    val popularity: Double,
+    val popularity: String,
     val poster_path: String,
     val release_date: String,
     val title: String,
-    val video: Boolean,
-    val vote_average: Double,
-    val vote_count: Int
+    val video: String,
+    val vote_average: String,
+    val vote_count: String
 )

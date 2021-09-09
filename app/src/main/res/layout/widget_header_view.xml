@@ -7,6 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="?attr/buttomNavigationBar"
         android:layout_height="wrap_content">
 
         <TextView
@@ -15,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="@string/movie"
             android:textSize="40sp"
-            android:textColor="@color/black"
+            android:textColor="?attr/buttomNavigationBarItem"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textStyle=""
@@ -39,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/movieGray" />
+            app:tint="?attr/buttomNavigationBarItem" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

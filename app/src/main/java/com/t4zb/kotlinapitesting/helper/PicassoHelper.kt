@@ -24,7 +24,12 @@ import java.lang.Exception
  */
 object PicassoHelper {
 
-    fun picassoUtils(context: Context,pictureUrl: String, imageView: ShapeableImageView){
+    fun picassoShapeableUtils(context: Context, pictureUrl: String, imageView: ShapeableImageView){
+        Picasso.get().load(pictureUrl)
+            .fit().centerCrop().into(imageView)
+    }
+
+    fun picassoUtils(context: Context, pictureUrl: String, imageView: ImageView){
         Picasso.get().load(pictureUrl)
             .fit().centerCrop().into(imageView)
     }

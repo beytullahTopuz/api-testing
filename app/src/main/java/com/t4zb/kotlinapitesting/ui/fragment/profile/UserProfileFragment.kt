@@ -16,7 +16,6 @@ import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.databinding.FragmentUserProfileBinding
 import com.t4zb.kotlinapitesting.helper.FirebaseDbHelper
 import com.t4zb.kotlinapitesting.helper.PicassoHelper
-import com.t4zb.kotlinapitesting.modelLayer.UserModel
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
 import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
@@ -54,7 +53,7 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
     private fun renderImage(imageURL: String) {
         showLogDebug(TAG, imageURL)
         if (imageURL != "") {
-            PicassoHelper.picassoUtils(mContext, imageURL, mBinding.toolbarBannerProfile)
+            PicassoHelper.picassoShapeableUtils(mContext, imageURL, mBinding.toolbarBannerProfile)
         }
     }
 
