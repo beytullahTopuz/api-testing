@@ -22,6 +22,8 @@ class SplashActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        bindigSplash.spastLottieAnim.playAnimation()
+
         if (!isNetworkConnected()){
 
             val toast = Toast.makeText(applicationContext,"You're offline. Check your connection",Toast.LENGTH_LONG)
@@ -31,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
                 val intent =Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
-            },200)
+            },4000)
     }
 
     private fun isNetworkConnected(): Boolean {

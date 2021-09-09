@@ -67,15 +67,16 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                         if (AppUser.getFirebaseUser() == null) {
 
                             //login fragment
-                     /*       val directions =
+                    /*        val directions =
                                 HomeFragmentDirections.actionHomeFragmentDirectionToLoginFragment()
                             findNavController(R.id.nav_host_fragment).navigate(directions)
 
 */
                             // register fragment
-                            val directions =
-                                  HomeFragmentDirections.actionHomeFragmentDirectionToRegisterFragment()
-                              findNavController(R.id.nav_host_fragment).navigate(directions)
+                               val directions =
+                                     HomeFragmentDirections.actionHomeFragmentDirectionToRegisterFragment()
+                                 findNavController(R.id.nav_host_fragment).navigate(directions)
+
 
                         } else {//profile fragment
 

@@ -9,18 +9,19 @@ import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.airbnb.lottie.animation.keyframe.BaseKeyframeAnimation
 import com.google.android.material.transition.MaterialContainerTransform
 import com.t4zb.kotlinapitesting.R
+import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.databinding.FragmentDetailBinding
-import com.t4zb.kotlinapitesting.helper.GmsFavoriteHelper
-import com.t4zb.kotlinapitesting.helper.MoviesFavorite
-import com.t4zb.kotlinapitesting.helper.PicassoHelper
-import com.t4zb.kotlinapitesting.helper.SwipeDismissActions
+import com.t4zb.kotlinapitesting.helper.*
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
 import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
 import com.t4zb.kotlinapitesting.ui.viewmodel.SharedViewModel
 import com.t4zb.kotlinapitesting.util.Constants
+import com.t4zb.kotlinapitesting.util.showLogDebug
+import com.t4zb.kotlinapitesting.util.showToast
 
 
 class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.ViewMain {
@@ -89,15 +90,23 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
             initDialog(R.style.DialogSlide)
         }
         mainBinding.likeButton.setOnClickListener {
-        /*    var moviesFavorite : MoviesFavorite
-            if (mSharedViewModel.movieType.value == Constants.MOVIE_TYPE_TOP_RATED){
-                moviesFavorite =MoviesFavorite (mSharedViewModel.selectedMovieTopRated.value)
-            }
-            if (mSharedViewModel.movieType.value == Constants.MOVIE_TYPE_POPULAR){
+    //  mainBinding.lottieLileAnim.playAnimation()
 
+
+            if (AppUser.getFirebaseUser() == null){
+                showToast(mContext,"please login or register")
+            }else{
+                if (mSharedViewModel.movieType.value.equals(Constants.MOVIE_TYPE_POPULAR)){
+                    GmsFavoriteHelper.insertFavoritePop(mSharedViewModel.selectedMoviePop.value!!)
+                    showLogDebug(TAG,"popular")
+                }
+                if (mSharedViewModel.movieType.value.equals(Constants.MOVIE_TYPE_TOP_RATED)){
+                    GmsFavoriteHelper.insertFavoriteTOP(mSharedViewModel.selectedMovieTopRated.value!!)
+                    showLogDebug(TAG,"top")
+                }
             }
-            GmsFavoriteHelper(mContext).insertFavorite(moviesFavorite)
-            */
+
+
         }
 
         SwipeDismissActions.fragmentDismiss(mainBinding.transitionCard,mContext)

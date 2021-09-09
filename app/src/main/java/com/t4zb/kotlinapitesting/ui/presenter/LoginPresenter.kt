@@ -4,6 +4,7 @@ import android.content.Intent
 import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.helper.FirebaseDbHelper
 import com.t4zb.kotlinapitesting.ui.contract.*
+import com.t4zb.kotlinapitesting.ui.fragment.register.RegisterFragment
 import com.t4zb.kotlinapitesting.util.showLogDebug
 import com.t4zb.kotlinapitesting.util.showLogError
 import com.t4zb.kotlinapitesting.util.toSafeString
@@ -14,8 +15,8 @@ import com.t4zb.kotlinapitesting.util.toSafeString
  * @author o00559125
  * @since 2021-09-06
  */
-class LoginPresenter constructor(
-    private val loginContract: LoginContract,
+class LoginPresenter(
+    private val loginContract: RegisterFragment,
     private val iLoginHelper: LoginHelper
 ) : LoginHelperCallback{
 

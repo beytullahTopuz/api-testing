@@ -1,19 +1,20 @@
 package com.t4zb.kotlinapitesting.ui.fragment.login
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.databinding.FragmentLoginBinding
+import com.t4zb.kotlinapitesting.helper.GmsLoginHelper
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
+import com.t4zb.kotlinapitesting.ui.contract.LoginHelper
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
-import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
+import com.t4zb.kotlinapitesting.ui.presenter.LoginPresenter
 
 class LoginFragment : BaseFragment(R.layout.fragment_login), BaseContract.ViewMain {
 
@@ -25,15 +26,17 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), BaseContract.ViewMa
 
     private lateinit var firebaseAuth: FirebaseAuth
 
-    private val mPresenter: BasePresenter by lazy {
-        BasePresenter(this)
+    private val gLoginHelper: LoginHelper by lazy {
+        GmsLoginHelper(mContext)
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         mBinding = FragmentLoginBinding.bind(view)
-        mPresenter.onViewsCreated()
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         mViewModel.loginViewState.observe(viewLifecycleOwner) { loginViewState ->
@@ -41,10 +44,27 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), BaseContract.ViewMa
         }
 
         mBinding.loginBtn.setOnClickListener {
+            mViewModel.str_email = mBinding.loginEmailTextField.text
+            mViewModel.str_password = mBinding.loginPasswordTextField.text
             mViewModel.btn_login_onclick(firebaseAuth)
         }
-        mViewModel.str_email = mBinding.loginEmailTextField.text
-        mViewModel.str_password = mBinding.loginPasswordTextField.text
+
+        mBinding.loginUpWithGoogleBtn.setOnClickListener {
+
+        }
+
+        mBinding.registerBtn.setOnClickListener {
+
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        gLoginHelper.onDataReceived(requestCode, resultCode, data)
     }
 
 

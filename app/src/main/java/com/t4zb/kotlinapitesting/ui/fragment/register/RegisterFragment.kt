@@ -4,10 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -58,12 +54,12 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register), LoginPresente
         mainBinding.signUpBtnSignUp.setOnClickListener {
 
             mViewModel.btn_register_onclick(firebaseAuth)
+            presenter.onEmailClick()
         }
         mainBinding.signUpWithGoogle.setOnClickListener {
 
             //mViewModel.btn_register_with_google(firebaseAuth)
             presenter.onSignInGClick()
-
         }
 
         mViewModel.str_name = mainBinding.signUpTextName.text

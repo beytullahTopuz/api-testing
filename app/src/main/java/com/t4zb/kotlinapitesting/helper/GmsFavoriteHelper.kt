@@ -7,6 +7,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
+import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
 import com.t4zb.kotlinapitesting.ui.viewholder.FirebaseViewHolder
 import com.t4zb.kotlinapitesting.util.FirebaseConstants
 import com.t4zb.kotlinapitesting.util.showLogDebug
@@ -15,7 +16,7 @@ import com.t4zb.kotlinapitesting.util.showLogError
 object GmsFavoriteHelper {
     private const val TAG = "GmsFavoriteHelper"
 
-    fun insertFavorite(moviesPopularity: MoviesPopularity) {
+    fun insertFavoritePop(moviesPopularity: MoviesPopularity) {
         val favPopDbRef = FirebaseDbHelper.getMoviesFavorite()
         val favPopMap = HashMap<String, String>()
         favPopMap[FirebaseConstants.ADULT] = moviesPopularity.adult.toString()
@@ -33,6 +34,7 @@ object GmsFavoriteHelper {
         favPopMap[FirebaseConstants.VOTE_AVERAGE] = moviesPopularity.vote_average.toString()
         favPopMap[FirebaseConstants.VOTE_COUNT] = moviesPopularity.vote_count.toString()
 
+        showLogDebug(TAG,moviesPopularity.title)
         favPopDbRef.setValue(favPopMap).addOnCompleteListener { taskResult ->
             if (taskResult.isSuccessful) {
                 showLogDebug(TAG, taskResult.result.toString())
@@ -40,6 +42,36 @@ object GmsFavoriteHelper {
                 showLogError(TAG, taskResult.exception?.message.toString())
             }
         }
+    }
+
+    fun insertFavoriteTOP(moviesTopRated: MoviesTopRated){
+        val favTopDbRef = FirebaseDbHelper.getMoviesFavorite()
+        val favTopMap = HashMap<String, String>()
+
+        favTopMap[FirebaseConstants.POPULARITY] = moviesTopRated.popularity.toString()
+        favTopMap[FirebaseConstants.VOTE_COUNT] = moviesTopRated.vote_count.toString()
+        favTopMap[FirebaseConstants.POSTER_PATH] = moviesTopRated.poster_path
+        favTopMap[FirebaseConstants.ID] = moviesTopRated.id.toString()
+        favTopMap[FirebaseConstants.ADULT] = moviesTopRated.adult.toString()
+        favTopMap[FirebaseConstants.BACKDROP_PATH] = moviesTopRated.backdrop_path
+        favTopMap[FirebaseConstants.ORIGINAL_LANGUAGE] = moviesTopRated.original_language
+        favTopMap[FirebaseConstants.ORIGINAL_TITLE] = moviesTopRated.original_title
+        favTopMap[FirebaseConstants.TITLE] = moviesTopRated.title
+        favTopMap[FirebaseConstants.VOTE_AVERAGE] = moviesTopRated.vote_average.toString()
+        favTopMap[FirebaseConstants.OVERVIEW] = moviesTopRated.overview
+        favTopMap[FirebaseConstants.RELEASE_DATE] = moviesTopRated.release_date
+
+
+
+        favTopDbRef.setValue(favTopMap).addOnCompleteListener { taskResult->
+            if (taskResult.isSuccessful) {
+                showLogDebug(TAG, taskResult.result.toString())
+            } else {
+                showLogError(TAG, taskResult.exception?.message.toString())
+            }
+
+        }
+
     }
 
     fun setFirebaseRecycler(recyclerView: RecyclerView) {
