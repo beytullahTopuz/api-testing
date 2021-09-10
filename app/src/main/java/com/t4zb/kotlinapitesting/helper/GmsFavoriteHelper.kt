@@ -96,7 +96,8 @@ object GmsFavoriteHelper {
                     // Click item id
                     val lisResUID = getRef(position).key
                     holderPopularity.delete_image.setOnClickListener {
-                        showToast(holderPopularity.parent.context,lisResUID!!)
+                        deleteFavorites(lisResUID!!)
+                        showToast(holderPopularity.parent.context, "Deleted ${ model.original_title }")
                     }
                     holderPopularity.bindUI(model)
                 }
