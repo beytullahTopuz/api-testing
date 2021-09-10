@@ -9,20 +9,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.t4zb.kotlinapitesting.R
+import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.databinding.FragmentFavoriteBinding
 import com.t4zb.kotlinapitesting.helper.FirebaseDbHelper
 import com.t4zb.kotlinapitesting.helper.GmsFavoriteHelper
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
 import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
+import com.t4zb.kotlinapitesting.util.showToast
 
 
 class FavoriteFragment : BaseFragment(R.layout.fragment_favorite), BaseContract.ViewMain {
-    private lateinit var  mContext: FragmentActivity
+    private lateinit var mContext: FragmentActivity
 
-    private lateinit var mBinding : FragmentFavoriteBinding
+    private lateinit var mBinding: FragmentFavoriteBinding
 
-    private val mPresenter : BasePresenter by lazy {
+    private val mPresenter: BasePresenter by lazy {
         BasePresenter(this)
     }
 
@@ -47,6 +49,11 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite), BaseContract.
     }
 
     override fun initializeViews() {
-        GmsFavoriteHelper.setFirebaseRecycler(mBinding.moviesFavoriteRecyclerView)
+        if (AppUser.getFirebaseUser() == null) {
+            showToast(mContext, "please login..")
+        } else{
+            GmsFavoriteHelper.setFirebaseRecycler(mBinding.moviesFavoriteRecyclerView)
+
+        }
     }
 }

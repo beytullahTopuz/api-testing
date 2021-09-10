@@ -1,4 +1,4 @@
-package com.t4zb.kotlinapitesting.helper
+package com.t4zb.kotlinapitesting.model
 
 data class MoviesFavorite(
     val adult: String="",

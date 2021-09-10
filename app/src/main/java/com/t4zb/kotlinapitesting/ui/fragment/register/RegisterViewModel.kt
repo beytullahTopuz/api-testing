@@ -8,7 +8,9 @@ import com.t4zb.kotlinapitesting.util.showLogDebug
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.t4zb.kotlinapitesting.helper.FirebaseDbHelper
 import com.t4zb.kotlinapitesting.util.Constants
+import com.t4zb.kotlinapitesting.util.toSafeString
 
 
 class RegisterViewModel : ViewModel() {
@@ -90,26 +92,30 @@ class RegisterViewModel : ViewModel() {
 
     private fun saveToDB(firebaseAuth: FirebaseAuth) {
 
-        firastoreDB.collection(Constants.FIRABASE_COLLECTION_USER)
-            .document(firebaseAuth.currentUser!!.uid).set(
+        var helper = FirebaseDbHelper
 
-                hashMapOf(
-                    "name" to str_name.toString(),
-                    "surname" to str_surname.toString(),
-                    "email" to str_email.toString(),
-                    "fotoURL" to ""
+        var uid: String = firebaseAuth.uid!!.toSafeString()
+
+        helper.getUserInfo(uid).setValue(
+            hashMapOf(
+
+                "uid" to uid,
+                "name" to str_name.toString(),
+                "surname" to str_surname.toString(),
+                "email" to str_email.toString(),
+                "avatar_url" to "",
+
                 )
-            ).addOnCompleteListener { taskResult ->
-                if (taskResult.isSuccessful) {
+        ).addOnCompleteListener {
+            if (it.isSuccessful) {
 
-                    showLogDebug(TAG,"User inserted to DB")
-                }else{
-                        firebaseAuth.currentUser!!.delete()
-                    showLogDebug(TAG,"ERROR : ${taskResult.exception?.message}")
-                }
+                showLogDebug(TAG,"User inserted to DB")
 
+            }else{
+                firebaseAuth.currentUser!!.delete()
+                showLogDebug(TAG,"ERROR : ${it.exception?.message}")
             }
-
+        }
     }
 
 

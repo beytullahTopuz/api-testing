@@ -6,12 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.t4zb.kotlinapitesting.R
-import com.t4zb.kotlinapitesting.appUser.AppUser
+import com.t4zb.kotlinapitesting.model.MoviesFavorite
 import com.t4zb.kotlinapitesting.modelLayer.rest.core.ImageUrlCore
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
 import com.t4zb.kotlinapitesting.ui.viewholder.FirebasePopularityViewHolder
-import com.t4zb.kotlinapitesting.util.Constants
 import com.t4zb.kotlinapitesting.util.FirebaseConstants
 import com.t4zb.kotlinapitesting.util.showLogDebug
 import com.t4zb.kotlinapitesting.util.showLogError
@@ -86,7 +85,7 @@ object GmsFavoriteHelper {
                 ): FirebasePopularityViewHolder {
                     //Inflater
                     val view = LayoutInflater.from(parent.context)
-                        .inflate(R.layout.item_card, parent, false)
+                        .inflate(R.layout.item_favorite_card, parent, false)
                     return FirebasePopularityViewHolder(view)
                 }
 
@@ -104,13 +103,6 @@ object GmsFavoriteHelper {
         recyclerView.adapter = adapterFire
     }
 
-    fun getFavoriteList() {
-//        FirebaseDbHelper.createMoviesFavorite().get().addOnCompleteListener { taskResult ->
-//            if (taskResult.isSuccessful) {
-//
-//            }
-//        }
-    }
 
     fun deleteFavorites(favoriteID: String) {
         FirebaseDbHelper.createMoviesFavorite(favoriteID).removeValue()

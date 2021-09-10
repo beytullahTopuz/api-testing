@@ -53,6 +53,10 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register), LoginPresente
 
         mainBinding.signUpBtnSignUp.setOnClickListener {
 
+            mViewModel.str_name = mainBinding.signUpTextName.text
+            mViewModel.str_email = mainBinding.signUpEmail.text
+            mViewModel.str_password = mainBinding.signUpTextPassword.text
+            mViewModel.str_passwordConfirm = mainBinding.signUpTextPasswordConfirm.text
             mViewModel.btn_register_onclick(firebaseAuth)
             presenter.onEmailClick()
         }
@@ -62,10 +66,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register), LoginPresente
             presenter.onSignInGClick()
         }
 
-        mViewModel.str_name = mainBinding.signUpTextName.text
-        mViewModel.str_email = mainBinding.signUpEmail.text
-        mViewModel.str_password = mainBinding.signUpTextPassword.text
-        mViewModel.str_passwordConfirm = mainBinding.signUpTextPasswordConfirm.text
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

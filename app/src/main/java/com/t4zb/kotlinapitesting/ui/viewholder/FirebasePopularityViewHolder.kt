@@ -5,7 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.t4zb.kotlinapitesting.R
-import com.t4zb.kotlinapitesting.helper.MoviesFavorite
+import com.t4zb.kotlinapitesting.helper.GmsFavoriteHelper
+import com.t4zb.kotlinapitesting.model.MoviesFavorite
 import com.t4zb.kotlinapitesting.helper.PicassoHelper
 
 /**
@@ -17,16 +18,23 @@ import com.t4zb.kotlinapitesting.helper.PicassoHelper
 class FirebasePopularityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     val parent: View = itemView
 
-    val image: ImageView
-    val text: TextView
+    val favorite_card_image_view: ImageView
+    val textView_title: TextView
+    val delete_image: ImageView
+
+
 
     fun bindUI(model: MoviesFavorite) {
-        PicassoHelper.picassoUtils(parent.context,model.poster_path,image)
-        text.text = model.original_title
+        PicassoHelper.picassoUtils(parent.context,model.poster_path,favorite_card_image_view)
+        textView_title.text = model.original_title
+        delete_image.setOnClickListener {
+       //     GmsFavoriteHelper.deleteFavorites()
+        }
     }
 
     init {
-        image = parent.findViewById(R.id.card_image_view)
-        text = parent.findViewById(R.id.textViewMovieName)
+        favorite_card_image_view = parent.findViewById(R.id.favorite_card_image_view)
+        textView_title = parent.findViewById(R.id.textView_title)
+        delete_image = parent.findViewById(R.id.delete_image)
     }
 }

@@ -14,8 +14,8 @@
            android:id="@+id/moviesFavoriteRecyclerView"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           tools:listitem="@layout/item_card"
-           app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+           tools:listitem="@layout/item_favorite_card"
+           app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
            app:spanCount="2"/>
 
 

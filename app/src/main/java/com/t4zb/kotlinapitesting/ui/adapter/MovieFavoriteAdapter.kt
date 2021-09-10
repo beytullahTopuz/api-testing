@@ -3,12 +3,8 @@ package com.t4zb.kotlinapitesting.ui.adapter
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
-import com.t4zb.kotlinapitesting.R
-import com.t4zb.kotlinapitesting.helper.MoviesFavorite
+import com.t4zb.kotlinapitesting.model.MoviesFavorite
 import com.t4zb.kotlinapitesting.ui.viewmodel.SharedViewModel
 
 class MovieFavoriteAdapter(
