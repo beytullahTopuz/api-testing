@@ -6,14 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.t4zb.kotlinapitesting.R
+import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.model.MoviesFavorite
 import com.t4zb.kotlinapitesting.modelLayer.rest.core.ImageUrlCore
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
 import com.t4zb.kotlinapitesting.ui.viewholder.FirebasePopularityViewHolder
-import com.t4zb.kotlinapitesting.util.FirebaseConstants
-import com.t4zb.kotlinapitesting.util.showLogDebug
-import com.t4zb.kotlinapitesting.util.showLogError
+import com.t4zb.kotlinapitesting.util.*
 
 object GmsFavoriteHelper {
     private const val TAG = "GmsFavoriteHelper"
@@ -96,6 +95,9 @@ object GmsFavoriteHelper {
                 ) {
                     // Click item id
                     val lisResUID = getRef(position).key
+                    holderPopularity.delete_image.setOnClickListener {
+                        showToast(holderPopularity.parent.context,lisResUID!!)
+                    }
                     holderPopularity.bindUI(model)
                 }
             }

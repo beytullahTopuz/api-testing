@@ -27,9 +27,6 @@ class FirebasePopularityViewHolder(itemView: View): RecyclerView.ViewHolder(item
     fun bindUI(model: MoviesFavorite) {
         PicassoHelper.picassoUtils(parent.context,model.poster_path,favorite_card_image_view)
         textView_title.text = model.original_title
-        delete_image.setOnClickListener {
-       //     GmsFavoriteHelper.deleteFavorites()
-        }
     }
 
     init {
