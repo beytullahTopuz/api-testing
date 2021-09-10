@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.t4zb.kotlinapitesting.R
+import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.modelLayer.rest.core.ImageUrlCore
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
 import com.t4zb.kotlinapitesting.ui.viewholder.FirebasePopularityViewHolder
+import com.t4zb.kotlinapitesting.util.Constants
 import com.t4zb.kotlinapitesting.util.FirebaseConstants
 import com.t4zb.kotlinapitesting.util.showLogDebug
 import com.t4zb.kotlinapitesting.util.showLogError
@@ -18,7 +20,7 @@ object GmsFavoriteHelper {
     private const val TAG = "GmsFavoriteHelper"
 
     fun insertFavoritePop(moviesPopularity: MoviesPopularity) {
-        val favPopDbRef = FirebaseDbHelper.createMoviesFavorite()
+        val favPopDbRef = FirebaseDbHelper.createMoviesFavorite(moviesPopularity.id.toString())
         val favPopMap = HashMap<String, String>()
         favPopMap[FirebaseConstants.ADULT] = moviesPopularity.adult.toString()
         favPopMap[FirebaseConstants.BACKDROP_PATH] = ImageUrlCore.buildImageCore(moviesPopularity.backdrop_path)
@@ -46,15 +48,15 @@ object GmsFavoriteHelper {
     }
 
     fun insertFavoriteTOP(moviesTopRated: MoviesTopRated){
-        val favTopDbRef = FirebaseDbHelper.createMoviesFavorite()
+        val favTopDbRef = FirebaseDbHelper.createMoviesFavorite(moviesTopRated.id.toString())
         val favTopMap = HashMap<String, String>()
 
         favTopMap[FirebaseConstants.POPULARITY] = moviesTopRated.popularity.toString()
         favTopMap[FirebaseConstants.VOTE_COUNT] = moviesTopRated.vote_count
-        favTopMap[FirebaseConstants.POSTER_PATH] = moviesTopRated.poster_path
+        favTopMap[FirebaseConstants.POSTER_PATH] = ImageUrlCore.buildImageCore(moviesTopRated.poster_path)
         favTopMap[FirebaseConstants.ID] = moviesTopRated.id.toString()
         favTopMap[FirebaseConstants.ADULT] = moviesTopRated.adult.toString()
-        favTopMap[FirebaseConstants.BACKDROP_PATH] = moviesTopRated.backdrop_path
+        favTopMap[FirebaseConstants.BACKDROP_PATH] = ImageUrlCore.buildImageCore(moviesTopRated.backdrop_path)
         favTopMap[FirebaseConstants.ORIGINAL_LANGUAGE] = moviesTopRated.original_language
         favTopMap[FirebaseConstants.ORIGINAL_TITLE] = moviesTopRated.original_title
         favTopMap[FirebaseConstants.TITLE] = moviesTopRated.title
@@ -111,7 +113,7 @@ object GmsFavoriteHelper {
     }
 
     fun deleteFavorites(favoriteID: String) {
-        FirebaseDbHelper.createMoviesFavorite().removeValue()
+        FirebaseDbHelper.createMoviesFavorite(favoriteID).removeValue()
             .addOnCompleteListener { taskResult ->
                 if (taskResult.isSuccessful) {
                     showLogDebug(TAG, taskResult.result.toString())

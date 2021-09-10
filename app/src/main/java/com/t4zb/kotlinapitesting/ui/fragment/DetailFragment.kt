@@ -1,15 +1,16 @@
 package com.t4zb.kotlinapitesting.ui.fragment
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.airbnb.lottie.animation.keyframe.BaseKeyframeAnimation
 import com.google.android.material.transition.MaterialContainerTransform
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.appUser.AppUser
@@ -21,6 +22,7 @@ import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
 import com.t4zb.kotlinapitesting.ui.viewmodel.SharedViewModel
 import com.t4zb.kotlinapitesting.util.Constants
 import com.t4zb.kotlinapitesting.util.showLogDebug
+import com.t4zb.kotlinapitesting.util.showSnack
 import com.t4zb.kotlinapitesting.util.showToast
 
 
@@ -50,6 +52,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
             scrimColor = Color.TRANSPARENT
             setAllContainerColors(Color.CYAN)
         }
+
     }
 
 
@@ -74,13 +77,19 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
 
     private fun initDialog(type: Int){
         val dialog = Dialog(mContext,R.style.BlurTheme)
-        dialog.window!!.attributes.windowAnimations = type
+        val window = dialog.window
+        window!!.attributes.windowAnimations = type
+        val width = ViewGroup.LayoutParams.MATCH_PARENT
+        val height = ViewGroup.LayoutParams.WRAP_CONTENT
+        window.setLayout(width, height)
+        val wpl = window.attributes
+        wpl.gravity = Gravity.BOTTOM
+        window.attributes = wpl
         dialog.setContentView(R.layout.share_alert_dialog)
         dialog.setCanceledOnTouchOutside(true)
 
+
         val sdShareLink = dialog.findViewById<LinearLayout>(R.id.sd_share_link)
-
-
 
         dialog.show()
     }
@@ -90,18 +99,19 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
             initDialog(R.style.DialogSlide)
         }
         mainBinding.likeButton.setOnClickListener {
-    //  mainBinding.lottieLileAnim.playAnimation()
-
-
             if (AppUser.getFirebaseUser() == null){
                 showToast(mContext,"please login or register")
             }else{
                 if (mSharedViewModel.movieType.value.equals(Constants.MOVIE_TYPE_POPULAR)){
                     GmsFavoriteHelper.insertFavoritePop(mSharedViewModel.selectedMoviePop.value!!)
+                    showSnack(mainBinding.root,resources.getString(R.string.snack_fav,
+                        mSharedViewModel.selectedMoviePop.value!!.original_title))
                     showLogDebug(TAG,"popular")
                 }
                 if (mSharedViewModel.movieType.value.equals(Constants.MOVIE_TYPE_TOP_RATED)){
                     GmsFavoriteHelper.insertFavoriteTOP(mSharedViewModel.selectedMovieTopRated.value!!)
+                    showSnack(mainBinding.root,resources.getString(R.string.snack_fav,
+                        mSharedViewModel.selectedMovieTopRated.value!!.original_title))
                     showLogDebug(TAG,"top")
                 }
             }
@@ -115,7 +125,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
             Constants.MOVIE_TYPE_POPULAR -> {
                 mSharedViewModel.selectedMoviePop.observe(viewLifecycleOwner, Observer { movies ->
                     mainBinding.run {
-                        mSharedViewModel.selectedMoviePop.observe(viewLifecycleOwner, Observer {
+                        mSharedViewModel.selectedMoviePop.observe(viewLifecycleOwner, {
                             if (it != null) {
                                 mainBinding.textViewTitle.text = it.title
                                 mainBinding.textViewOverview.text = it.overview
@@ -141,7 +151,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
                 })
             }
             Constants.MOVIE_TYPE_TOP_RATED -> {
-                mSharedViewModel.selectedMovieTopRated.observe(viewLifecycleOwner, Observer { movies ->
+                mSharedViewModel.selectedMovieTopRated.observe(viewLifecycleOwner, { movies ->
                     mainBinding.run {
                         if (movies != null) {
                             mainBinding.textViewTitle.text = movies.title

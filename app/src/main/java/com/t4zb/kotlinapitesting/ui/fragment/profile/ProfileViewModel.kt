@@ -22,13 +22,13 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun getUserToDB(firebaseAuth: FirebaseAuth) {
-        var currentId = firebaseAuth.currentUser?.uid.toString()
+        val currentId = firebaseAuth.currentUser?.uid.toString()
 
         firastoreDB.collection(Constants.FIRABASE_COLLECTION_USER).document(currentId)
             .get(Source.DEFAULT).addOnCompleteListener {taskResult->
                 if (taskResult.isSuccessful){
 
-                    var json =taskResult.result!!
+                    val json =taskResult.result!!
                     val tempUser =UserModel(
                         json.id,
                         json["name"].toString(),

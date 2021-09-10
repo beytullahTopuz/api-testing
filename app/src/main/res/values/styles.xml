@@ -5,6 +5,5 @@
         <item name="colorControlActivated">@color/primary</item>
         <item name="minHeight">12dp</item>
         <item name="maxHeight">12dp</item>
-        <item name="android:numStars">5</item>
     </style>
 </resources>

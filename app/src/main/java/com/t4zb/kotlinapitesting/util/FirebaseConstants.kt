@@ -29,8 +29,5 @@ class FirebaseConstants {
         const val VIDEO = "video"
         const val VOTE_AVERAGE = "vote_average"
         const val VOTE_COUNT = "vote_count"
-
-
-
     }
 }

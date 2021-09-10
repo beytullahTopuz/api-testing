@@ -16,6 +16,7 @@
     <!--BottomAppBar-->
     <string name="bottom_app_bar_chevron_content_desc">Open or close bottom navigation drawer</string>
     <string name="bottom_nav_drawer_profile_image_content_desc">profile avatar image</string>
+    <string name="snack_fav">%1$s is added to your favorites.</string>
 
     <string name="detail_card_transition">detail_card_transition_name</string>
     <string name="star_cap">STAR</string>
