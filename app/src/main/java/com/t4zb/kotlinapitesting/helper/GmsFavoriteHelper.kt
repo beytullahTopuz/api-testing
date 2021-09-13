@@ -5,37 +5,46 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.t4zb.kotlinapitesting.R
-import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.model.MoviesFavorite
 import com.t4zb.kotlinapitesting.modelLayer.rest.core.ImageUrlCore
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
 import com.t4zb.kotlinapitesting.ui.viewholder.FirebasePopularityViewHolder
-import com.t4zb.kotlinapitesting.util.*
+import com.t4zb.kotlinapitesting.util.FirebaseConstants
+import com.t4zb.kotlinapitesting.util.showLogDebug
+import com.t4zb.kotlinapitesting.util.showLogError
+import com.t4zb.kotlinapitesting.util.showToast
+import kotlinx.coroutines.*
+import java.util.concurrent.TimeUnit
 
 object GmsFavoriteHelper {
     private const val TAG = "GmsFavoriteHelper"
 
     fun insertFavoritePop(moviesPopularity: MoviesPopularity) {
-        val favPopDbRef = FirebaseDbHelper.createMoviesFavorite(moviesPopularity.id.toString())
+        val favPopDbRef = FirebaseDbHelper.getMoviesFavorite(moviesPopularity.id.toString())
         val favPopMap = HashMap<String, String>()
         favPopMap[FirebaseConstants.ADULT] = moviesPopularity.adult.toString()
-        favPopMap[FirebaseConstants.BACKDROP_PATH] = ImageUrlCore.buildImageCore(moviesPopularity.backdrop_path)
+        favPopMap[FirebaseConstants.BACKDROP_PATH] =
+            ImageUrlCore.buildImageCore(moviesPopularity.backdrop_path)
         favPopMap[FirebaseConstants.GENRE_IDS] = moviesPopularity.genre_ids[0].toString()
         favPopMap[FirebaseConstants.ID] = moviesPopularity.id.toString()
         favPopMap[FirebaseConstants.ORIGINAL_LANGUAGE] = moviesPopularity.original_language
         favPopMap[FirebaseConstants.ORIGINAL_TITLE] = moviesPopularity.original_title
         favPopMap[FirebaseConstants.OVERVIEW] = moviesPopularity.overview
         favPopMap[FirebaseConstants.POPULARITY] = moviesPopularity.popularity.toString()
-        favPopMap[FirebaseConstants.POSTER_PATH] = ImageUrlCore.buildImageCore(moviesPopularity.poster_path)
+        favPopMap[FirebaseConstants.POSTER_PATH] =
+            ImageUrlCore.buildImageCore(moviesPopularity.poster_path)
         favPopMap[FirebaseConstants.RELEASE_DATE] = moviesPopularity.release_date
         favPopMap[FirebaseConstants.TITLE] = moviesPopularity.title
         favPopMap[FirebaseConstants.VIDEO] = moviesPopularity.video.toString()
         favPopMap[FirebaseConstants.VOTE_AVERAGE] = moviesPopularity.vote_average.toString()
         favPopMap[FirebaseConstants.VOTE_COUNT] = moviesPopularity.vote_count.toString()
 
-        showLogDebug(TAG,moviesPopularity.title)
+        showLogDebug(TAG, moviesPopularity.title)
         favPopDbRef.setValue(favPopMap).addOnCompleteListener { taskResult ->
             if (taskResult.isSuccessful) {
                 showLogDebug(TAG, taskResult.result.toString())
@@ -45,16 +54,18 @@ object GmsFavoriteHelper {
         }
     }
 
-    fun insertFavoriteTOP(moviesTopRated: MoviesTopRated){
-        val favTopDbRef = FirebaseDbHelper.createMoviesFavorite(moviesTopRated.id.toString())
+    fun insertFavoriteTOP(moviesTopRated: MoviesTopRated) {
+        val favTopDbRef = FirebaseDbHelper.getMoviesFavorite(moviesTopRated.id.toString())
         val favTopMap = HashMap<String, String>()
 
         favTopMap[FirebaseConstants.POPULARITY] = moviesTopRated.popularity.toString()
         favTopMap[FirebaseConstants.VOTE_COUNT] = moviesTopRated.vote_count
-        favTopMap[FirebaseConstants.POSTER_PATH] = ImageUrlCore.buildImageCore(moviesTopRated.poster_path)
+        favTopMap[FirebaseConstants.POSTER_PATH] =
+            ImageUrlCore.buildImageCore(moviesTopRated.poster_path)
         favTopMap[FirebaseConstants.ID] = moviesTopRated.id.toString()
         favTopMap[FirebaseConstants.ADULT] = moviesTopRated.adult.toString()
-        favTopMap[FirebaseConstants.BACKDROP_PATH] = ImageUrlCore.buildImageCore(moviesTopRated.backdrop_path)
+        favTopMap[FirebaseConstants.BACKDROP_PATH] =
+            ImageUrlCore.buildImageCore(moviesTopRated.backdrop_path)
         favTopMap[FirebaseConstants.ORIGINAL_LANGUAGE] = moviesTopRated.original_language
         favTopMap[FirebaseConstants.ORIGINAL_TITLE] = moviesTopRated.original_title
         favTopMap[FirebaseConstants.TITLE] = moviesTopRated.title
@@ -62,7 +73,7 @@ object GmsFavoriteHelper {
         favTopMap[FirebaseConstants.OVERVIEW] = moviesTopRated.overview
         favTopMap[FirebaseConstants.RELEASE_DATE] = moviesTopRated.release_date
 
-        favTopDbRef.setValue(favTopMap).addOnCompleteListener { taskResult->
+        favTopDbRef.setValue(favTopMap).addOnCompleteListener { taskResult ->
             if (taskResult.isSuccessful) {
                 showLogDebug(TAG, taskResult.result.toString())
             } else {
@@ -77,7 +88,8 @@ object GmsFavoriteHelper {
         val options = FirebaseRecyclerOptions.Builder<MoviesFavorite>()
             .setQuery(FirebaseDbHelper.getMoviesAll(), MoviesFavorite::class.java).build()
         val adapterFire =
-            object : FirebaseRecyclerAdapter<MoviesFavorite, FirebasePopularityViewHolder>(options) {
+            object :
+                FirebaseRecyclerAdapter<MoviesFavorite, FirebasePopularityViewHolder>(options) {
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
                     viewType: Int
@@ -96,8 +108,7 @@ object GmsFavoriteHelper {
                     // Click item id
                     val lisResUID = getRef(position).key
                     holderPopularity.delete_image.setOnClickListener {
-                        deleteFavorites(lisResUID!!)
-                        showToast(holderPopularity.parent.context, "Deleted ${ model.original_title }")
+                        showToast(holderPopularity.parent.context, lisResUID!!)
                     }
                     holderPopularity.bindUI(model)
                 }
@@ -107,14 +118,40 @@ object GmsFavoriteHelper {
     }
 
 
-    fun deleteFavorites(favoriteID: String) {
-        FirebaseDbHelper.createMoviesFavorite(favoriteID).removeValue()
-            .addOnCompleteListener { taskResult ->
-                if (taskResult.isSuccessful) {
-                    showLogDebug(TAG, taskResult.result.toString())
-                } else {
-                    showLogError(TAG, taskResult.exception?.message.toString())
+    fun deleteFavorites(pos: Int) {
+        val keyHolder = ArrayList<String>()
+        val db = FirebaseDbHelper.getMoviesAll()
+        var keyCounter: Int = 0
+        db.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val childKey = snapshot.children
+                keyCounter = snapshot.childrenCount.toInt()
+                for (snaps in childKey) {
+                    val key = snaps.key!!
+                    keyHolder.add(key)
                 }
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                showLogError(TAG, error.toString())
+            }
+        })
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(TimeUnit.MILLISECONDS.toMillis(150))
+            withContext(Dispatchers.Main) {
+                showLogDebug(TAG, "this will be called after 3 seconds")
+                if (keyCounter == keyHolder.size) {
+                    FirebaseDbHelper.getMoviesFavorite(keyHolder[pos]).removeValue()
+                        .addOnCompleteListener { taskResult ->
+                            if (taskResult.isSuccessful) {
+                                showLogDebug(TAG, taskResult.result.toString())
+                            } else {
+                                showLogError(TAG, taskResult.exception?.message.toString())
+                            }
+                        }
+                }
+            }
+        }
+
     }
 }
