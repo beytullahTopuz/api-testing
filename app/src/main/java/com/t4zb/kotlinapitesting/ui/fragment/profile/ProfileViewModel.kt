@@ -8,10 +8,14 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.t4zb.kotlinapitesting.modelLayer.UserModel
 import com.t4zb.kotlinapitesting.util.Constants
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.content.ContextCompat.checkSelfPermission
 
 class ProfileViewModel : ViewModel() {
     private val firastoreDB = Firebase.firestore
-    val user : MutableLiveData<UserModel> = MutableLiveData()
+    val user: MutableLiveData<UserModel> = MutableLiveData()
 
     fun singOut(firebaseAuth: FirebaseAuth) {
         firebaseAuth.signOut()
@@ -25,11 +29,11 @@ class ProfileViewModel : ViewModel() {
         val currentId = firebaseAuth.currentUser?.uid.toString()
 
         firastoreDB.collection(Constants.FIRABASE_COLLECTION_USER).document(currentId)
-            .get(Source.DEFAULT).addOnCompleteListener {taskResult->
-                if (taskResult.isSuccessful){
+            .get(Source.DEFAULT).addOnCompleteListener { taskResult ->
+                if (taskResult.isSuccessful) {
 
-                    val json =taskResult.result!!
-                    val tempUser =UserModel(
+                    val json = taskResult.result!!
+                    val tempUser = UserModel(
                         json.id,
                         json["name"].toString(),
                         json["surname"].toString(),

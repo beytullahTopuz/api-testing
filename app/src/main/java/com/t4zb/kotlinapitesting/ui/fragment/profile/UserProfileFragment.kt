@@ -1,9 +1,14 @@
 package com.t4zb.kotlinapitesting.ui.fragment.profile
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.google.android.material.appbar.AppBarLayout
@@ -43,32 +48,60 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
         mViewModel.getUserToDB(firebaseAuth)
         firebaseAuth = FirebaseAuth.getInstance()
 
-        mBinding.buttonSignout.setOnClickListener {
+        mBinding.signOutBtn.setOnClickListener {
             mViewModel.singOut(firebaseAuth)
+        }
+        mBinding.profileImageView.setOnClickListener {
+            //update profile image on firabase
+          /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_DENIED
+                ) {
+                    //permission denied
+                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    //show popup to request runtime permission
+                    requestPermissions(permissions, PERMISSION_CODE)
+                } else {
+                    //permission already granted
+                    pickImageFromGallery()
+                }
+            } else {
+                //system OS is < Marshmallow
+                pickImageFromGallery()
+            }
+            */
         }
         render()
     }
 
-    //HATALI
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+
     private fun renderImage(imageURL: String) {
         showLogDebug(TAG, imageURL)
         if (imageURL != "") {
-            PicassoHelper.picassoShapeableUtils(mContext, imageURL, mBinding.toolbarBannerProfile)
+            PicassoHelper.picassoUtils(mContext, imageURL, mBinding.profileImageView)
         }
     }
+
 
     private fun render() {
         val firebaseDB = FirebaseDbHelper.getUserInfo(AppUser.getFirebaseUser()!!.uid)
         firebaseDB.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val name = snapshot.child(FirebaseConstants.PATH_NAME).value.toString()
-                val surname = snapshot.child(FirebaseConstants.PATH_SURNAME).value.toString()
+              //  val surname = snapshot.child(FirebaseConstants.PATH_SURNAME).value.toString()
                 val avatar = snapshot.child(FirebaseConstants.PATH_AVATAR).value.toString()
                 val email = snapshot.child(FirebaseConstants.PATH_EMAIL).value.toString()
 
                 renderImage(avatar)
-                mBinding.profileEmailAddress.setText(email)
-                mBinding.profileName.setText(name)
+                mBinding.emailTextField.setText(email)
+                mBinding.userNameTextField.setText(name)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -84,7 +117,7 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
         super.onCreate(savedInstanceState)
     }
 
-    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+  /*  override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
         val maxScroll = mBinding.appBarProfile.totalScrollRange
         val perc = abs(verticalOffset).toFloat() / maxScroll.toFloat()
         showLogDebug(TAG, "" + perc)
@@ -100,19 +133,21 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
                 ContextCompat.getDrawable(mContext, R.color.transparent)
         }
     }
+    */
 
     override fun setupViewModel() {
 
     }
 
     override fun initializeViews() {
-        mBinding.appBarProfile.post {
+     /*   mBinding.appBarProfile.post {
             val height = ViewUtils.getScreenWidth(mContext) * 1 / 3
             setOffset(height)
         }
+        */
     }
 
-    fun setOffset(offsetPx: Int) {
+  /*  fun setOffset(offsetPx: Int) {
         val params = mBinding.appBarProfile.layoutParams as CoordinatorLayout.LayoutParams
         val behavior = params.behavior as AppBarLayout.Behavior
         behavior.onNestedPreScroll(
@@ -124,8 +159,19 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile), BaseCo
             intArrayOf(0, 0)
         )
     }
+    */
 
     companion object {
         private const val TAG = "UserProfileFragment"
+
+        //image pick code
+        private const val IMAGE_PICK_CODE = 1000
+
+        //Permission code
+        private const val PERMISSION_CODE = 1001
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+
     }
 }
