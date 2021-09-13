@@ -25,6 +25,8 @@ import nl.joery.animatedbottombar.AnimatedBottomBar
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
     private lateinit var mBinding: ActivityMainBinding
 
+    private lateinit var navController: NavController
+
     private val currentNavFragment: Fragment?
         get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
             ?.childFragmentManager
@@ -67,15 +69,15 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                         if (AppUser.getFirebaseUser() == null) {
 
                             //login fragment
-                    /*        val directions =
-                                HomeFragmentDirections.actionHomeFragmentDirectionToLoginFragment()
-                            findNavController(R.id.nav_host_fragment).navigate(directions)
+                            /*        val directions =
+                                        HomeFragmentDirections.actionHomeFragmentDirectionToLoginFragment()
+                                    findNavController(R.id.nav_host_fragment).navigate(directions)
 
-*/
+        */
                             // register fragment
-                               val directions =
-                                     HomeFragmentDirections.actionHomeFragmentDirectionToRegisterFragment()
-                                 findNavController(R.id.nav_host_fragment).navigate(directions)
+                            val directions =
+                                HomeFragmentDirections.actionHomeFragmentDirectionToRegisterFragment()
+                            findNavController(R.id.nav_host_fragment).navigate(directions)
 
 
                         } else {//profile fragment
@@ -88,6 +90,12 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 }
             }
         })
+    }
+
+    fun getForegroundFragment(): Fragment? {
+        val navHostFragment: Fragment? =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        return navHostFragment?.childFragmentManager?.fragments?.get(0)
     }
 
     override fun onDestinationChanged(

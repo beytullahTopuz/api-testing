@@ -1,23 +1,24 @@
 package com.t4zb.kotlinapitesting.helper
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.t4zb.kotlinapitesting.R
+import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.model.MoviesFavorite
 import com.t4zb.kotlinapitesting.modelLayer.rest.core.ImageUrlCore
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesPopularity
 import com.t4zb.kotlinapitesting.modelLayer.rest.service.response.MoviesTopRated
 import com.t4zb.kotlinapitesting.ui.viewholder.FirebasePopularityViewHolder
-import com.t4zb.kotlinapitesting.util.FirebaseConstants
-import com.t4zb.kotlinapitesting.util.showLogDebug
-import com.t4zb.kotlinapitesting.util.showLogError
-import com.t4zb.kotlinapitesting.util.showToast
+import com.t4zb.kotlinapitesting.util.*
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
@@ -118,10 +119,13 @@ object GmsFavoriteHelper {
     }
 
 
-    fun deleteFavorites(pos: Int) {
+    fun deleteFavorites(pos: Int, view: View, context: Context) {
         val keyHolder = ArrayList<String>()
+        val nameHolder = ArrayList<String>()
+        val dbHolder = ArrayList<Any?>()
         val db = FirebaseDbHelper.getMoviesAll()
-        var keyCounter: Int = 0
+        var keyCounter = 0
+        var name = ""
         db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val childKey = snapshot.children
@@ -129,6 +133,19 @@ object GmsFavoriteHelper {
                 for (snaps in childKey) {
                     val key = snaps.key!!
                     keyHolder.add(key)
+                    val mvDb = FirebaseDbHelper.getMoviesFavorite(key)
+                    mvDb.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            name =
+                                snapshot.child(FirebaseConstants.ORIGINAL_TITLE).value.toString()
+                            nameHolder.add(name)
+                            dbHolder.add(snapshot.value)
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            showLogError(TAG, error.toString())
+                        }
+                    })
                 }
             }
 
@@ -137,13 +154,29 @@ object GmsFavoriteHelper {
             }
         })
         CoroutineScope(Dispatchers.IO).launch {
-            delay(TimeUnit.MILLISECONDS.toMillis(150))
+            delay(TimeUnit.MILLISECONDS.toMillis(300))
             withContext(Dispatchers.Main) {
-                showLogDebug(TAG, "this will be called after 3 seconds")
                 if (keyCounter == keyHolder.size) {
-                    FirebaseDbHelper.getMoviesFavorite(keyHolder[pos]).removeValue()
+                    val dbMovie = FirebaseDbHelper.getMoviesFavorite(keyHolder[pos])
+                    dbMovie.removeValue()
                         .addOnCompleteListener { taskResult ->
                             if (taskResult.isSuccessful) {
+                                Snackbar.make(
+                                    view,
+                                    context.resources.getString(
+                                        R.string.movie_removed,
+                                        nameHolder[pos]
+                                    ),
+                                    Snackbar.LENGTH_LONG
+                                )
+                                    .setAction("Undo") {
+                                        run {
+                                            val map: MutableMap<String, Any> = HashMap()
+                                            map["${Constants.FIRABASE_COLLECTION_MOVIES_FAVORITE}/${AppUser.getFirebaseUser()!!.uid}/${keyHolder[pos]}"] =
+                                                dbHolder[pos] as Any
+                                            FirebaseDbHelper.rootRef().updateChildren(map)
+                                        }
+                                    }.show()
                                 showLogDebug(TAG, taskResult.result.toString())
                             } else {
                                 showLogError(TAG, taskResult.exception?.message.toString())
@@ -152,6 +185,5 @@ object GmsFavoriteHelper {
                 }
             }
         }
-
     }
 }

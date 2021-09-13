@@ -29,7 +29,9 @@ import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
 import com.t4zb.kotlinapitesting.ui.viewmodel.SharedViewModel
 import com.t4zb.kotlinapitesting.util.Constants
 import com.t4zb.kotlinapitesting.util.ViewUtils
+import com.t4zb.kotlinapitesting.util.expandView
 import com.t4zb.kotlinapitesting.util.showLogDebug
+import nl.joery.animatedbottombar.AnimatedBottomBar
 import java.util.*
 import kotlin.math.abs
 
@@ -60,6 +62,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), BaseContract.ViewMain
 
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
+
+
     }
 
     override fun setupViewModel() {
@@ -70,7 +74,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), BaseContract.ViewMain
     }
 
     override fun initializeViews() {
-
         mBinding.appBarLayout.post {
             val height = ViewUtils.getScreenWidth(mContext) * 1 / 3
             setOffset(height)
@@ -133,6 +136,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), BaseContract.ViewMain
                 mBinding.popularRecyclerView.adapter = moviesPopAdapter
             }
         })
+
+        val bar = mContext.findViewById<AnimatedBottomBar>(R.id.bottomNavigationView)
+        bar?.visibility = View.VISIBLE
     }
 
     fun setOffset(offsetPx: Int) {

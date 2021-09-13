@@ -7,7 +7,6 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,16 +14,15 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.t4zb.kotlinapitesting.R
 import com.t4zb.kotlinapitesting.appUser.AppUser
 import com.t4zb.kotlinapitesting.databinding.FragmentDetailBinding
-import com.t4zb.kotlinapitesting.helper.*
+import com.t4zb.kotlinapitesting.helper.GmsFavoriteHelper
+import com.t4zb.kotlinapitesting.helper.PicassoHelper
+import com.t4zb.kotlinapitesting.helper.SwipeDismissActions
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
 import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
 import com.t4zb.kotlinapitesting.ui.viewmodel.SharedViewModel
-import com.t4zb.kotlinapitesting.util.Constants
-import com.t4zb.kotlinapitesting.util.showLogDebug
-import com.t4zb.kotlinapitesting.util.showSnack
-import com.t4zb.kotlinapitesting.util.showToast
-
+import com.t4zb.kotlinapitesting.util.*
+import nl.joery.animatedbottombar.AnimatedBottomBar
 
 class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.ViewMain {
 
@@ -52,14 +50,12 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
             scrimColor = Color.TRANSPARENT
             setAllContainerColors(Color.CYAN)
         }
-
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = requireActivity()
-
     }
 
     companion object {
@@ -75,8 +71,8 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
 
     }
 
-    private fun initDialog(type: Int){
-        val dialog = Dialog(mContext,R.style.BlurTheme)
+    private fun initDialog(type: Int) {
+        dialog = Dialog(mContext, R.style.BlurTheme)
         val window = dialog.window
         window!!.attributes.windowAnimations = type
         val width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -95,24 +91,34 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
     }
 
     override fun initializeViews() {
+        val bar = mContext.findViewById<AnimatedBottomBar>(R.id.bottomNavigationView)
+        bar.expandView()
         mainBinding.shareButton.setOnClickListener {
             initDialog(R.style.DialogSlide)
         }
         mainBinding.likeButton.setOnClickListener {
-            if (AppUser.getFirebaseUser() == null){
-                showToast(mContext,"please login or register")
-            }else{
-                if (mSharedViewModel.movieType.value.equals(Constants.MOVIE_TYPE_POPULAR)){
+            if (AppUser.getFirebaseUser() == null) {
+                showToast(mContext, "please login or register")
+            } else {
+                if (mSharedViewModel.movieType.value.equals(Constants.MOVIE_TYPE_POPULAR)) {
                     GmsFavoriteHelper.insertFavoritePop(mSharedViewModel.selectedMoviePop.value!!)
-                    showSnack(mainBinding.root,resources.getString(R.string.snack_fav,
-                        mSharedViewModel.selectedMoviePop.value!!.original_title))
-                    showLogDebug(TAG,"popular")
+                    showSnack(
+                        mainBinding.root, resources.getString(
+                            R.string.snack_fav,
+                            mSharedViewModel.selectedMoviePop.value!!.original_title
+                        )
+                    )
+                    showLogDebug(TAG, "popular")
                 }
-                if (mSharedViewModel.movieType.value.equals(Constants.MOVIE_TYPE_TOP_RATED)){
+                if (mSharedViewModel.movieType.value.equals(Constants.MOVIE_TYPE_TOP_RATED)) {
                     GmsFavoriteHelper.insertFavoriteTOP(mSharedViewModel.selectedMovieTopRated.value!!)
-                    showSnack(mainBinding.root,resources.getString(R.string.snack_fav,
-                        mSharedViewModel.selectedMovieTopRated.value!!.original_title))
-                    showLogDebug(TAG,"top")
+                    showSnack(
+                        mainBinding.root, resources.getString(
+                            R.string.snack_fav,
+                            mSharedViewModel.selectedMovieTopRated.value!!.original_title
+                        )
+                    )
+                    showLogDebug(TAG, "top")
                 }
             }
 
@@ -131,7 +137,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
                                 mainBinding.textViewOverview.text = it.overview
                                 mainBinding.dRelease.text = it.release_date
                                 mainBinding.dLanguage.text = it.original_language
-                                mainBinding.dRating.rating = (it.vote_average/2).toFloat()
+                                mainBinding.dRating.rating = (it.vote_average / 2).toFloat()
                                 mainBinding.dAverage.text = (it.popularity).toString()
 
                                 PicassoHelper.picassoOkhttp(
@@ -158,7 +164,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), BaseContract.View
                             mainBinding.textViewOverview.text = movies.overview
                             mainBinding.dRelease.text = movies.release_date
                             mainBinding.dLanguage.text = movies.original_language
-                            mainBinding.dRating.rating = (movies.vote_average/2).toFloat()
+                            mainBinding.dRating.rating = (movies.vote_average / 2).toFloat()
                             mainBinding.dAverage.text = (movies.popularity).toString()
 
                             PicassoHelper.picassoOkhttp(

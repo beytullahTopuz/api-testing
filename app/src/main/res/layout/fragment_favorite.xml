@@ -7,6 +7,7 @@
     tools:context=".ui.fragment.FavoriteFragment">
 
    <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/fav_constraint"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
@@ -14,9 +15,13 @@
            android:id="@+id/moviesFavoriteRecyclerView"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           tools:listitem="@layout/item_favorite_card"
            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-           app:spanCount="2"/>
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           app:spanCount="2"
+           tools:listitem="@layout/item_favorite_card" />
 
 
    </androidx.constraintlayout.widget.ConstraintLayout>

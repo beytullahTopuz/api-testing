@@ -36,7 +36,7 @@ abstract class SwipeControlActions(context: Context) : ItemTouchHelper.Callback(
          * if (viewHolder?.itemViewType == YourAdapter.SOME_TYPE) return 0
          * if (viewHolder?.adapterPosition == 0) return 0
          */
-        if (viewHolder.adapterPosition == 10) return 0
+        // if (viewHolder.adapterPosition == 10) return 0
         return makeMovementFlags(0, LEFT)
     }
 

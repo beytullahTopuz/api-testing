@@ -5,299 +5,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@drawable/dr_strange"
     tools:context="com.t4zb.kotlinapitesting.ui.fragment.profile.UserProfileFragment">
-
-    <!--    <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBar_profile"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                app:expandedTitleMarginEnd="64dp"
-                android:requiresFadingEdge="horizontal"
-                android:fadingEdgeLength="16dp"
-                android:fadingEdge="horizontal"
-                app:contentScrim="@color/colorWhite"
-                app:expandedTitleMarginStart="48dp"
-                app:statusBarScrim="@color/colorWhite"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/toolbar_banner_profile"
-                    android:contentDescription="@string/image"
-                    app:shapeAppearanceOverlay="@style/ImageView.Corner"
-                    android:layout_width="match_parent"
-                    android:background="@drawable/card_profile"
-                    android:src="@mipmap/ic_launcher"
-                    android:scaleType="fitXY"
-                    android:layout_height="@dimen/profile_card_height"
-                    android:fitsSystemWindows="true"
-                    app:layout_collapseMode="parallax"/>
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin">
-
-
-
-                    <include
-                        android:id="@+id/toolbar_header_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        layout="@layout/widget_header_profile"
-                        android:layout_marginStart="30dp"
-                        app:layout_behavior=".helper.HeaderBehaviorHelper" />
-
-
-                </androidx.appcompat.widget.Toolbar>
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
-        -->
-
-    <!--<androidx.core.widget.NestedScrollView
-        android:id="@+id/frag_nested_lyt_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/linearLayoutCompat_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat_mail"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_edit"
-                    android:textColorHint="@color/primary_dark"
-                    app:boxBackgroundColor="@color/colorRightBubble"
-                    app:boxCollapsedPaddingTop="3dp"
-                    app:boxStrokeColor="@color/colorRightBubble"
-                    app:boxStrokeWidth="1dp"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="20"
-                    app:counterTextColor="@color/primary_dark"
-                    app:errorEnabled="true"
-                    app:errorTextColor="@color/primary_dark"
-                    app:hintTextColor="@color/primary_dark">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/profile_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/transparent"
-                        android:hint="@string/name"
-                        android:inputType="text"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/primary_dark"
-                        android:textSize="@dimen/edit_text_size" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/linearLayoutCompat_mail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat_star"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_name">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_edit"
-                    android:textColorHint="@color/primary_dark"
-                    app:boxBackgroundColor="@color/colorRightBubble"
-                    app:boxCollapsedPaddingTop="3dp"
-                    app:boxStrokeColor="@color/colorRightBubble"
-                    app:boxStrokeWidth="1dp"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="20"
-                    app:counterTextColor="@color/primary_dark"
-                    app:errorEnabled="true"
-                    app:errorTextColor="@color/primary_dark"
-                    app:hintTextColor="@color/primary_dark">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/profile_email_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/transparent"
-                        android:hint="@string/mail_address"
-                        android:inputType="text"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/primary_dark"
-                        android:textSize="@dimen/edit_text_size" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/linearLayoutCompat_star"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_mail">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_edit"
-                    android:textColorHint="@color/primary_dark"
-                    app:boxBackgroundColor="@color/colorRightBubble"
-                    app:boxCollapsedPaddingTop="3dp"
-                    app:boxStrokeColor="@color/colorRightBubble"
-                    app:boxStrokeWidth="1dp"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="20"
-                    app:counterTextColor="@color/primary_dark"
-                    app:errorEnabled="true"
-                    app:errorTextColor="@color/primary_dark"
-                    app:hintTextColor="@color/primary_dark">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/profile_email_star"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/transparent"
-                        android:hint="@string/star"
-                        android:inputType="text"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/primary_dark"
-                        android:textSize="@dimen/edit_text_size" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/linearLayoutCompat_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_star">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_edit"
-                    android:textColorHint="@color/primary_dark"
-                    app:boxBackgroundColor="@color/colorRightBubble"
-                    app:boxCollapsedPaddingTop="3dp"
-                    app:boxStrokeColor="@color/colorRightBubble"
-                    app:boxStrokeWidth="1dp"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="20"
-                    app:counterTextColor="@color/primary_dark"
-                    app:errorEnabled="true"
-                    app:errorTextColor="@color/primary_dark"
-                    app:hintTextColor="@color/primary_dark">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/profile_star"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/transparent"
-                        android:hint="@string/password"
-                        android:inputType="text"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/primary_dark"
-                        android:textSize="@dimen/edit_text_size" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_update"
-                android:layout_width="153dp"
-                android:layout_height="63dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/gradient_bg_button"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/round_selector"
-                android:text="@string/update_cap"
-                android:textColor="@color/movieGray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_pass" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/buttonSignout"
-                android:layout_width="153dp"
-                android:layout_height="63dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/round_selector"
-                android:background="@drawable/gradient_bg_button"
-                android:text="Sign out"
-                android:textColor="@color/movieGray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat_pass" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>-->
-
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/frag_nested_lyt_profile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/scrim_bottom"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/scrim_bottom">
-
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:layout_marginTop="39dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="30dp"
                 android:weightSum="2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
@@ -335,6 +67,7 @@
                 android:background="@drawable/bg_reg_edit"
                 android:textColorHint="@color/movieGray"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:startIconTint="@color/icon_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
                 app:startIconDrawable="@drawable/mail">
@@ -343,7 +76,9 @@
                     android:id="@+id/emailTextField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="E mail"
+                    android:drawableTint="@color/icon_gray"
+                    android:hint="@string/e_mail"
+                    android:textColor="@color/movieGray"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -356,6 +91,7 @@
                 android:layout_marginTop="95dp"
                 android:background="@drawable/bg_reg_edit"
                 android:textColorHint="@color/movieGray"
+                app:startIconTint="@color/icon_gray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_image_view"
@@ -365,7 +101,9 @@
                     android:id="@+id/userNameTextField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="user name"
+                    android:textColor="@color/movieGray"
+                    android:drawableTint="@color/icon_gray"
+                    android:hint="@string/user_name"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -379,6 +117,7 @@
                 android:background="@drawable/bg_reg_edit"
                 android:textColorHint="@color/movieGray"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:startIconTint="@color/icon_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
                 app:startIconDrawable="@drawable/password">
@@ -387,28 +126,30 @@
                     android:id="@+id/passwordTextField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="password"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
+                    android:drawableTint="@color/icon_gray"
+                    android:textColor="@color/movieGray"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image_view"
-                android:layout_width="102dp"
-                android:layout_height="102dp"
+                android:layout_width="142dp"
+                android:layout_height="142dp"
                 android:layout_marginTop="144dp"
                 android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/round_ripple"
                 app:civ_border_color="@color/white"
                 app:civ_border_width="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/avatars">
 
             </de.hdodenhof.circleimageview.CircleImageView>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

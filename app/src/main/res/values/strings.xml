@@ -36,4 +36,7 @@
     <string name="google_sign_in">Google Sign in</string>
     <string name="error_no_perm">No permissions were granted!</string>
     <string name="close">Close</string>
+    <string name="movie_removed">%1$s removed.</string>
+    <string name="user_name">Username</string>
+    <string name="e_mail">E-mail</string>
 </resources>

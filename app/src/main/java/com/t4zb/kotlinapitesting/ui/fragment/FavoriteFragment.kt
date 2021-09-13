@@ -13,7 +13,9 @@ import com.t4zb.kotlinapitesting.helper.SwipeControlActions
 import com.t4zb.kotlinapitesting.ui.contract.BaseContract
 import com.t4zb.kotlinapitesting.ui.fragment.basefragment.BaseFragment
 import com.t4zb.kotlinapitesting.ui.presenter.BasePresenter
+import com.t4zb.kotlinapitesting.util.expandView
 import com.t4zb.kotlinapitesting.util.showToast
+import nl.joery.animatedbottombar.AnimatedBottomBar
 
 
 class FavoriteFragment : BaseFragment(R.layout.fragment_favorite), BaseContract.ViewMain {
@@ -35,6 +37,7 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite), BaseContract.
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentFavoriteBinding.bind(view)
         mPresenter.onViewsCreated()
+
     }
 
 
@@ -56,7 +59,7 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite), BaseContract.
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val adapter = mBinding.moviesFavoriteRecyclerView.adapter
                     pos = viewHolder.absoluteAdapterPosition
-                    GmsFavoriteHelper.deleteFavorites(pos)
+                    GmsFavoriteHelper.deleteFavorites(pos, mBinding.favConstraint, mContext)
                     adapter!!.notifyItemRemoved(viewHolder.absoluteAdapterPosition)
                 }
             }
