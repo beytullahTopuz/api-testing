@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/novigationBarItemMovie"
+        android:contentDescription="@string/movie_cap"
+        android:icon="@drawable/logo"
+        android:iconTint="@color/primary"
+        android:menuCategory="system"
+        android:title="@string/movie_cap"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/novigationBarItemStar"
+        android:contentDescription="@string/star_cap"
+        android:icon="@drawable/ic_star"
+        android:iconTint="@color/primary"
+        android:menuCategory="system"
+        android:title="@string/star_cap"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/novigationBarItemProfile"
+        android:contentDescription="@string/profile_cap"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:iconTint="@color/primary"
+        android:menuCategory="system"
+        android:title="@string/profile_cap"
+        app:showAsAction="always" />
+
+</menu>

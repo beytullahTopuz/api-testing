@@ -12,5 +12,50 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+    <style name="LightMode" parent="Theme.MaterialComponents.DayNight.DarkActionBar" >
+        <item name="color_primary">@color/purple_500</item>
+        <item name="color_textColor">@color/textColorLIGHT</item>
+        <item name="buttomNavigationBar">@color/buttomNavigationBarLIGHT</item>
+        <item name="buttomNavigationBarItem">@color/buttomNavigationBarItemLIGHT</item>
+        <item name="color_background">@color/backgraundLIGHT</item>
+        <item name="editTextBackgraund">@color/editTextBackgraundLIGHT</item>
+        <item name="editTextTextColor">@color/editTextTextColorLIGHT</item>
+    </style>
+
+    <style name="DarkMode" parent="Theme.MaterialComponents.DayNight.DarkActionBar" >
+        <item name="color_primary">@color/white</item>
+        <item name="color_textColor">@color/textColorDARK</item>
+        <item name="buttomNavigationBar">@color/buttomNavigationBarDARK</item>
+        <item name="buttomNavigationBarItem">@color/buttomNavigationBarItemDARK</item>
+        <item name="color_background">@color/backgraundDARK</item>
+        <item name="editTextBackgraund">@color/editTextBackgraundDARK</item>
+        <item name="editTextTextColor">@color/buttomNavigationBarItemLIGHT</item>
+    </style>
+
+    <style name="bar_item1" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:buttonTint">@color/primary_dark</item>
+    </style>
+
+    <style name="DialogSlide">
+        <item name="android:windowEnterAnimation">@anim/slide_in_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_down</item>
+    </style>
+
+    <style name="BlurTheme" parent="android:style/Theme.Translucent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="ImageView.Corner" parent="">
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">@dimen/card_profile_corners</item>
+        <item name="cornerSizeBottomRight">@dimen/card_profile_corners</item>
+        <item name="cornerFamily">rounded</item>
     </style>
 </resources>

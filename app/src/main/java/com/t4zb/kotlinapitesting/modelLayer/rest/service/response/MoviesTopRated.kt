@@ -21,5 +21,17 @@ package com.t4zb.kotlinapitesting.modelLayer.rest.service.response
  * @author o00559125
  * @since 2021-08-23
  */
-data class MoviesTopRated (
+data class MoviesTopRated(
+    val popularity: Double,
+    val vote_count: String,
+    val poster_path: String,
+    val id: Int,
+    val adult: Boolean,
+    val backdrop_path: String,
+    val original_language: String,
+    val original_title: String,
+    val title: String,
+    val vote_average: Double,
+    val overview: String,
+    val release_date: String
 )

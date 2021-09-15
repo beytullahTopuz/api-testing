@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">Kotlin API testing</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie_name">movie name</string>
+    <string name="image">image</string>
+    <string name="movie">Movie</string>
+
+    <string name="in_movies_today">Movies Today</string>
+    <string name="more_info">More Info</string>
+
+    <string name="dummy_text" translatable="false">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum eaque enim sit soluta. Ab cum expedita ipsam laboriosam necessitatibus officiis perspiciatis similique sunt temporibus voluptatem. Deserunt, dolore doloremque earum error expedita fuga, id in laboriosam maiores nesciunt nihil nostrum quod sapiente sed sit soluta tempora, tempore voluptate. Quas, sunt?
+    </string>
+
+    <!--BottomAppBar-->
+    <string name="bottom_app_bar_chevron_content_desc">Open or close bottom navigation drawer</string>
+    <string name="bottom_nav_drawer_profile_image_content_desc">profile avatar image</string>
+    <string name="snack_fav">%1$s is added to your favorites.</string>
+
+    <string name="detail_card_transition">detail_card_transition_name</string>
+    <string name="star_cap">STAR</string>
+    <string name="profile_cap">PROFILE</string>
+    <string name="movie_cap">MOVIE</string>
+    <string name="star">Star</string>
+    <string name="favorite_cap">FAVORITE</string>
+    <string name="favorite">Favorite</string>
+    <string name="mail_address">Mail Address</string>
+    <string name="name">Username</string>
+    <string name="password">Password</string>
+    <string name="update_cap">UPDATE</string>
+    <string name="log_out_cap">LOG OUT</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="popular">Popular</string>
+    <string name="movie_app">MOVIE APP</string>
+    <string name="google_sign_in">Google Sign in</string>
+    <string name="error_no_perm">No permissions were granted!</string>
+    <string name="close">Close</string>
+    <string name="movie_removed">%1$s removed.</string>
+    <string name="user_name">Username</string>
+    <string name="e_mail">E-mail</string>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:type="linear"
+        android:startColor="#FFB42E"
+        android:centerColor="#C48F30"
+        android:angle="90"
+        android:endColor="#916E31"/>
+
+    <corners android:bottomLeftRadius="@dimen/card_profile_corners"
+        android:bottomRightRadius="@dimen/card_profile_corners"/>
+</shape>

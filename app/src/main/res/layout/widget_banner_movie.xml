@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/single_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="6dp"
+    android:visibility="visible"
+    android:transitionName="@string/detail_card_transition">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/single_movie_banner_image"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:contentDescription="@string/image"
+            android:foreground="@drawable/scrim_bottom"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/single_movie_banner_more_txt"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/single_movie_banner_more_info"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="5dp"
+            android:paddingStart="@dimen/padding_general"
+            android:paddingEnd="@dimen/padding_general"
+            android:text="@string/in_movies_today"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/single_movie_banner_more_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/single_movie_banner_more"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="5dp"
+            android:ellipsize="end"
+            android:maxWidth="230dp"
+            android:maxLines="3"
+            android:paddingStart="@dimen/padding_general"
+            android:paddingEnd="@dimen/padding_general"
+            android:textColor="@color/colorWhite"
+            tools:text="@string/dummy_text" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/single_movie_banner_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/single_movie_banner_image"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="3dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/ic_button_info"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/more_info"
+            android:textColor="@color/movieGray" />
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
+

@@ -1,6 +1,5 @@
-package com.t4zb.kotlinapitesting
+package com.t4zb.kotlinapitesting.ui.activity
 
-import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
@@ -23,20 +22,18 @@ class SplashActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        bindigSplash.spastLottieAnim.playAnimation()
+
         if (!isNetworkConnected()){
 
-            var toast = Toast.makeText(applicationContext,"You're offline. Check your connection",Toast.LENGTH_LONG)
+            val toast = Toast.makeText(applicationContext,"You're offline. Check your connection",Toast.LENGTH_LONG)
             toast.show()
         }
             Handler().postDelayed({
-                var intent =Intent(this,MainActivity::class.java)
+                val intent =Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             },4000)
-
-
-
-
     }
 
     private fun isNetworkConnected(): Boolean {
@@ -44,7 +41,4 @@ class SplashActivity : AppCompatActivity() {
 
         return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
-
-
-
 }
